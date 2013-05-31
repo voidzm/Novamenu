@@ -1,0 +1,4 @@
+1.5.2
+class,net.minecraft.client.gui.GuiScreen,axr
+method,net.minecraft.client.Minecraft/displayGuiScreen,a
+field,net.minecraft.client.settings.GameSettings/showDebugInfo,ab
