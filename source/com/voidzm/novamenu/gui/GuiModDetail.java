@@ -9,8 +9,6 @@ import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
 
-import com.voidzm.novamenu.util.NovamenuFontUtils;
-
 import scala.Array;
 
 import cpw.mods.fml.client.TextureFXManager;
@@ -74,17 +72,36 @@ public class GuiModDetail extends GuiNovamenuScreen {
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 		int offset = 5;
-		this.drawCenteredString(this.fontRenderer, this.mod.getName(), this.width / 2, 82 + offset, 0xFFFFFF);
-		this.drawCenteredString(this.fontRenderer, String.format("Version: %s (%s)", this.mod.getDisplayVersion(), this.mod.getVersion()), this.width / 2, 97 + offset, 0xAAAAAA);
-		this.drawCenteredString(this.fontRenderer, String.format("Credits: %s", this.mod.getMetadata().credits), this.width / 2, 112 + offset, 0xAAAAAA);
-		this.drawCenteredString(this.fontRenderer, String.format("Authors: %s", this.mod.getMetadata().getAuthorList()), this.width / 2, 127 + offset, 0xAAAAAA);
-		this.drawCenteredString(this.fontRenderer, String.format("Website: %s", this.mod.getMetadata().url), this.width / 2, 142 + offset, 0xAAAAAA);
-		String desc = this.mod.getMetadata().description;
-		String[] lines = NovamenuFontUtils.injectWrapping(desc, 400).split("\n");
-		int i = 0;
-		for(String string : lines) {
-			this.getFontRenderer().drawString(string, this.width / 2 - 200, 157 + offset + i, 0xCCCCCC, true);
-			i += 11;
+		int shift = 0;
+		String modName = this.mod.getName();
+		String modDisplayVersion = this.mod.getDisplayVersion();
+		String modVersion = this.mod.getVersion();
+		String modCredits = this.mod.getMetadata().credits;
+		String modAuthors = this.mod.getMetadata().getAuthorList();
+		String modWebsite = this.mod.getMetadata().url;
+		String modDescription = this.mod.getMetadata().description;
+		if(modName != null) {
+			this.drawCenteredString(this.fontRenderer, modName, this.width / 2, 82 + offset + shift, 0xFFFFFF);
+			shift += 15;
+		}
+		if(modDisplayVersion != null && modVersion != null) {
+			this.drawCenteredString(this.fontRenderer, String.format("Version: %s (%s)", modDisplayVersion, modVersion), this.width / 2, 82 + offset + shift, 0xAAAAAA);
+			shift += 15;
+		}
+		if(modCredits != null) {
+			this.drawCenteredString(this.fontRenderer, String.format("Credits: %s", modCredits), this.width / 2, 82 + offset + shift, 0xAAAAAA);
+			shift += 15;
+		}
+		if(modAuthors != null) {
+			this.drawCenteredString(this.fontRenderer, String.format("Authors: %s", modAuthors), this.width / 2, 82 + offset + shift, 0xAAAAAA);
+			shift += 15;
+		}
+		if(modWebsite != null) {
+			this.drawCenteredString(this.fontRenderer, String.format("Website: %s", modWebsite), this.width / 2, 82 + offset + shift, 0xAAAAAA);
+			shift += 15;
+		}
+		if(modDescription != null) {
+			this.fontRenderer.drawSplitString(modDescription, this.width / 2 - 200, 157 + offset, 400, 0xCCCCCC);
 		}
 	}
 
