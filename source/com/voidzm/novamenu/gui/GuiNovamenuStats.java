@@ -71,10 +71,10 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 				this.selectedSlot = this.generalSlot;
 				break;
 			case 2:
-				this.selectedSlot = this.itemSlot;
+				this.selectedSlot = this.blockSlot;
 				break;
 			case 3:
-				this.selectedSlot = this.blockSlot;
+				this.selectedSlot = this.itemSlot;
 				break;
 			default:
 				this.selectedSlot.actionPerformed(id);

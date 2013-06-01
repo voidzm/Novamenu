@@ -1,11 +1,17 @@
 package com.voidzm.novamenu.gui;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
+
+import com.voidzm.novamenu.util.NovamenuFontUtils;
+
+import scala.Array;
 
 import cpw.mods.fml.client.TextureFXManager;
 import cpw.mods.fml.common.ModContainer;
@@ -73,7 +79,13 @@ public class GuiModDetail extends GuiNovamenuScreen {
 		this.drawCenteredString(this.fontRenderer, String.format("Credits: %s", this.mod.getMetadata().credits), this.width / 2, 112 + offset, 0xAAAAAA);
 		this.drawCenteredString(this.fontRenderer, String.format("Authors: %s", this.mod.getMetadata().getAuthorList()), this.width / 2, 127 + offset, 0xAAAAAA);
 		this.drawCenteredString(this.fontRenderer, String.format("Website: %s", this.mod.getMetadata().url), this.width / 2, 142 + offset, 0xAAAAAA);
-		this.getFontRenderer().drawSplitString(this.mod.getMetadata().description, this.width / 2 - 200, 157 + offset, 400, 0xCCCCCC);
+		String desc = this.mod.getMetadata().description;
+		String[] lines = NovamenuFontUtils.injectWrapping(desc, 400).split("\n");
+		int i = 0;
+		for(String string : lines) {
+			this.getFontRenderer().drawString(string, this.width / 2 - 200, 157 + offset + i, 0xCCCCCC, true);
+			i += 11;
+		}
 	}
-	
+
 }

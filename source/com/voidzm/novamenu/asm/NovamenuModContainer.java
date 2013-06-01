@@ -49,7 +49,7 @@ public class NovamenuModContainer extends DummyModContainer {
 		meta.name = "Novamenu";
 		meta.version = NovamenuPlugin.novamenuVersion;
 		meta.authorList = Arrays.asList("voidzm");
-		meta.description = "A GUI mod that overhauls the Minecraft default GUI for a cleaner, more transparent look.";
+		meta.description = /*"A GUI mod that overhauls the Minecraft default GUI for a cleaner, more transparent look."*/"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id neque tellus, id condimentum sapien. Sed tempus hendrerit facilisis. Sed ultricies tortor et tortor volutpat ullamcorper. Donec volutpat sem vel ipsum vulputate non pellentesque mauris convallis. In eleifend sem quis lectus dignissim volutpat lacinia massa mollis. Pellentesque porta dapibus ligula vitae consequat. Curabitur placerat diam eleifend enim feugiat condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque a sollicitudin risus. Pellentesque volutpat fermentum erat.";
 		meta.credits = "Designed and coded by voidzm.";
 		meta.url = "https://github.com/voidzm/Novamenu/";
 		meta.logoFile = "/mods/novamenu/textures/gui/logo.png";
