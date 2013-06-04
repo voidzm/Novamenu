@@ -85,7 +85,7 @@ public class GuiNovamenuScreen extends GuiScreen {
 	}
 
 	public void drawScreenBackground(int mouseX, int mouseY, float tick) {
-		if(imageTick >= imageTime*(imageCount+1)) imageTick = 0;
+		if(imageTick >= imageTime*imageCount) imageTick = 0;
 		float tickf = ((float)imageTick)+tick;
 		float indexf = imageTick / imageTime;
 		int index = (int)Math.floor(indexf);
