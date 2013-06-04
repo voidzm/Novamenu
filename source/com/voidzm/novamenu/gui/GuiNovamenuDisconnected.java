@@ -1,8 +1,13 @@
 package com.voidzm.novamenu.gui;
 
+import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
 
+import cpw.mods.fml.client.GuiDupesFound;
+
+import net.minecraft.client.gui.GuiDisconnected;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.StringTranslate;
 
 public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
@@ -22,6 +27,33 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 		this.imageTick = tick;
 	}
 
+	public GuiNovamenuDisconnected(GuiScreen par1Disconnected) {
+		if(!(par1Disconnected instanceof GuiDisconnected)) { // The ASM code that is supposed to call this went very, very bad.
+			throw new RuntimeException();
+		}
+		this.parent = new GuiNovamenuMultiplayer(new GuiNovamenuMainMenu());
+		String oldMessage = "";
+		String oldDetail = "";
+		Object[] oldMessageArray = null;
+		try {
+			Field m = GuiDisconnected.class.getField("errorMessage");
+			m.setAccessible(true);
+			oldMessage = (String)m.get(par1Disconnected);
+			Field d = GuiDisconnected.class.getField("errorDetail");
+			d.setAccessible(true);
+			oldDetail = (String)d.get(par1Disconnected);
+			Field o = GuiDisconnected.class.getField("field_74247_c");
+			o.setAccessible(true);
+			oldMessageArray = (Object[])o.get(par1Disconnected);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		this.errorMessage = oldMessage;
+		this.errorDetail = oldDetail;
+		this.messageArray = oldMessageArray;
+	}
+	
 	@Override
 	protected void keyTyped(char par1, int par2) {}
 

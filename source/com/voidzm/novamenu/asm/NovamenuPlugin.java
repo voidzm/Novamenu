@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
-@TransformerExclusions(value={"com.voidzm.novamenu.asm"})
+@TransformerExclusions(value={"com.voidzm.novamenu.asm", "com.voidzm.novamenu.gui"})
 @MCVersion(value="1.5.2")
 public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 

@@ -113,7 +113,7 @@ public class NovamenuModContainer extends DummyModContainer {
 
 	@Override
 	public boolean isNetworkMod() {
-		return true;
+		return false;
 	}
 
 	@Override

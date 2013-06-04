@@ -6,6 +6,7 @@
 package com.voidzm.novamenu.gui;
 
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,6 +30,8 @@ public class GuiNovamenuScreen extends GuiScreen {
 	private static final float imageTime = 250.0F;
 	private static final float transitionTime = 120.0F;
 	
+	private int imageCount = 0;
+	
 	public GuiNovamenuScreen() {
 		try {
 			background = ImageIO.read(this.getClass().getResourceAsStream("/mods/novamenu/textures/gui/bg.png"));
@@ -36,6 +39,20 @@ public class GuiNovamenuScreen extends GuiScreen {
 			e.printStackTrace();
 		}
 		imageTick = new Random().nextInt(6)*(int)imageTime;
+		this.setupTextureIndexes();
+	}
+
+	private void setupTextureIndexes() {
+		boolean tryToFindImage = true;
+		while(tryToFindImage) {
+			InputStream targetStream = this.getClass().getResourceAsStream("/mods/novamenu/textures/gui/bg"+(imageCount == 0 ? "" : imageCount+1)+".png");
+			if(targetStream == null) {
+				tryToFindImage = false;
+			}
+			else {
+				imageCount++;
+			}
+		}
 	}
 	
 	public void buttonEvent(int id) {}
@@ -68,17 +85,12 @@ public class GuiNovamenuScreen extends GuiScreen {
 	}
 
 	public void drawScreenBackground(int mouseX, int mouseY, float tick) {
-		if(imageTick >= imageTime*6) imageTick = 0;
+		if(imageTick >= imageTime*(imageCount+1)) imageTick = 0;
 		float tickf = ((float)imageTick)+tick;
 		float indexf = imageTick / imageTime;
 		int index = (int)Math.floor(indexf);
 		float progress = tickf - (imageTime * (float)index);
-		if(index == 0) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg.png"));
-		else if(index == 1) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg2.png"));
-		else if(index == 2) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg3.png"));
-		else if(index == 3) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg4.png"));
-		else if(index == 4) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg5.png"));
-		else if(index == 5) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg6.png"));
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("%blur%/mods/novamenu/textures/gui/bg"+(index == 0 ? "" : index+1)+".png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int[] locs = this.calcPositions();
 		this.drawTexture(locs[0], locs[1], locs[2], locs[3]);
@@ -87,12 +99,8 @@ public class GuiNovamenuScreen extends GuiScreen {
 			double elapsed = progress-(imageTime-transitionTime);
 			elapsed /= (double)transitionTime;
 			double alpha = calculateEasingFunction(elapsed);
-			if(index == 0) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg2.png"));
-			else if(index == 1) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg3.png"));
-			else if(index == 2) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg4.png"));
-			else if(index == 3) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg5.png"));
-			else if(index == 4) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg6.png"));
-			else if(index == 5) GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/mods/novamenu/textures/gui/bg.png"));
+			int indexAdj = index < imageCount - 1 ? index + 1 : 0;
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("%blur%/mods/novamenu/textures/gui/bg"+(indexAdj == 0 ? "" : indexAdj+1)+".png"));
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4d(1.0D, 1.0D, 1.0D, (double)alpha);

@@ -15,8 +15,12 @@ import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
 import static org.objectweb.asm.Opcodes.NEW;
 import static org.objectweb.asm.Opcodes.PUTFIELD;
 
+import net.minecraft.client.gui.GuiDisconnected;
+
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
+
+import com.voidzm.novamenu.gui.GuiNovamenuDisconnected;
 
 public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 
@@ -35,6 +39,18 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 		mv.visitMethodInsn(INVOKESPECIAL, "com/voidzm/novamenu/gui/GuiNovamenuIngameMenu", "<init>", "()V");
 		mv.visitVarInsn(ASTORE, 1);
 		mv.visitLabel(j1);
+		
+		mv.visitVarInsn(ALOAD, 1);
+		mv.visitTypeInsn(INSTANCEOF, "net/minecraft/client/gui/GuiDisconnected");
+		Label j2 = new Label();
+		mv.visitJumpInsn(IFEQ, j2);
+		mv.visitTypeInsn(NEW, "com/voidzm/novamenu/gui/GuiNovamenuDisconnected");
+		mv.visitInsn(DUP);
+		mv.visitVarInsn(ALOAD, 1);
+		mv.visitMethodInsn(INVOKESPECIAL, "com/voidzm/novamenu/gui/GuiNovamenuDisconnected", "<init>", "(Lnet/minecraft/client/gui/GuiScreen;)V");
+		mv.visitVarInsn(ASTORE, 1);
+		mv.visitLabel(j2);
+	
 		mv.visitCode();
 	}
 	

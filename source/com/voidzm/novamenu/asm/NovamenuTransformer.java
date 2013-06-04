@@ -6,6 +6,9 @@
 package com.voidzm.novamenu.asm;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
@@ -14,7 +17,7 @@ import cpw.mods.fml.common.asm.transformers.AccessTransformer;
 import cpw.mods.fml.relauncher.FMLRelauncher;
 
 public class NovamenuTransformer extends AccessTransformer {
-
+	
 	public NovamenuTransformer() throws IOException {
 		super();
 	}
@@ -44,5 +47,5 @@ public class NovamenuTransformer extends AccessTransformer {
 		}
 		return bytes;
 	}
-
+	
 }
