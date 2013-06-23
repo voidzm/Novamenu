@@ -1,6 +1,7 @@
 package com.voidzm.novamenu.asm;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import cpw.mods.fml.relauncher.IFMLCallHook;
@@ -16,6 +17,22 @@ public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 	public static boolean isDevEnvironment = true;
 	public static String minecraftVersion = "1.5.2";
 	public static String novamenuVersion = "1.0.2";
+	
+	private static NovamenuPlugin instance;
+	
+	public NovamenuPlugin() {
+		super();
+		instance = this;
+	}
+	
+	public static NovamenuPlugin instance() {
+		if(instance != null) {
+			return instance;
+		}
+		else {
+			return new NovamenuPlugin();
+		}
+	}
 	
 	@Override
 	public String[] getLibraryRequestClass() {
