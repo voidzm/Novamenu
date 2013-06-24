@@ -36,13 +36,13 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 		String oldDetail = "";
 		Object[] oldMessageArray = null;
 		try {
-			Field m = GuiDisconnected.class.getField("errorMessage");
+			Field m = GuiDisconnected.class.getDeclaredField("errorMessage");
 			m.setAccessible(true);
 			oldMessage = (String)m.get(par1Disconnected);
-			Field d = GuiDisconnected.class.getField("errorDetail");
+			Field d = GuiDisconnected.class.getDeclaredField("errorDetail");
 			d.setAccessible(true);
 			oldDetail = (String)d.get(par1Disconnected);
-			Field o = GuiDisconnected.class.getField("field_74247_c");
+			Field o = GuiDisconnected.class.getDeclaredField("field_74247_c");
 			o.setAccessible(true);
 			oldMessageArray = (Object[])o.get(par1Disconnected);
 		}

@@ -71,4 +71,25 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 		mv.visitFieldInsn(opcode, owner, name, desc);
 	}
 	
+	
+	@Override
+	public void visitTypeInsn(int opcode, String type)  {
+		if(opcode == NEW && type.equals("net/minecraft/client/gui/GuiGameOver")) {
+			mv.visitTypeInsn(NEW, "com/voidzm/novamenu/gui/GuiNovamenuGameOver");
+		}
+		else {
+			mv.visitTypeInsn(opcode, type);
+		}
+	}
+	
+	@Override
+	public void visitMethodInsn(int opcode, String owner, String name, String desc) {
+		if(opcode == INVOKESPECIAL && owner.equals("net/minecraft/client/gui/GuiGameOver") && name.equals("<init>") && desc.equals("()V")) {
+			mv.visitMethodInsn(INVOKESPECIAL, "com/voidzm/novamenu/gui/GuiNovamenuGameOver", "<init>", "()V");
+		}
+		else {
+			mv.visitMethodInsn(opcode, owner, name, desc);
+		}
+	}
+	
 }

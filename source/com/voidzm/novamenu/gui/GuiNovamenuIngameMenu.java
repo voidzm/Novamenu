@@ -57,8 +57,8 @@ public class GuiNovamenuIngameMenu extends GuiNovamenuScreen {
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
-		this.drawRect(0, 0, 200, height, 0x88000000);
-		this.drawRect(200, 0, 201, height, 0xAA000000);
+		this.drawRect(0, 0, 200, height, 0xAA000000);
+		this.drawRect(200, 0, 201, height, 0xDD000000);
 		for(GuiButtonTransparent iterated : buttons) {
 			iterated.draw(par1, par2);
 		}
