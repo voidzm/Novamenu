@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import com.voidzm.novamenu.util.NovamenuConfiguration;
+
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.IFMLCallHook;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
@@ -16,13 +19,22 @@ public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 	public static File location;
 	public static boolean isDevEnvironment = true;
 	public static String minecraftVersion = "1.5.2";
-	public static String novamenuVersion = "1.0.2";
+	public static String novamenuVersion = "1.0.3";
 	
 	private static NovamenuPlugin instance;
+	
+	private static NovamenuConfiguration configuration;
 	
 	public NovamenuPlugin() {
 		super();
 		instance = this;
+	}
+	
+	public static NovamenuConfiguration getConfiguration() {
+		if(configuration == null) {
+			configuration = new NovamenuConfiguration(new File(Loader.instance().getConfigDir(), "Novamenu.cfg"));
+		}
+		return configuration;
 	}
 	
 	public static NovamenuPlugin instance() {

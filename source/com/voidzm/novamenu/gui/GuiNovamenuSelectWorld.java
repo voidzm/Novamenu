@@ -10,8 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 
+import com.voidzm.novamenu.asm.NovamenuPlugin;
+
 import net.minecraft.client.AnvilConverterException;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiErrorScreen;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.MathHelper;
@@ -231,18 +234,33 @@ public class GuiNovamenuSelectWorld extends GuiNovamenuScreen {
 			}
 			break;
 		case 3:
-			this.mc.displayGuiScreen(new GuiNovamenuCreateWorld(this));
+			if(NovamenuPlugin.getConfiguration().useCustomCreateWorldMenu) {
+				this.mc.displayGuiScreen(new GuiNovamenuCreateWorld(this));
+			}
+			else {
+				this.mc.displayGuiScreen(new GuiCreateWorld(this));
+			}
 			break;
 		case 6:
 			this.mc.displayGuiScreen(new GuiNovamenuRenameWorld(this, this.getSaveFileName(this.selectedWorld)));
 			break;
 		case 7:
-			GuiNovamenuCreateWorld guicreateworld = new GuiNovamenuCreateWorld(this);
-			ISaveHandler isavehandler = this.mc.getSaveLoader().getSaveLoader(this.getSaveFileName(this.selectedWorld), false);
-			WorldInfo worldinfo = isavehandler.loadWorldInfo();
-			isavehandler.flush();
-			guicreateworld.func_82286_a(worldinfo);
-			this.mc.displayGuiScreen(guicreateworld);
+			if(NovamenuPlugin.getConfiguration().useCustomCreateWorldMenu) {
+				GuiNovamenuCreateWorld guicreateworld = new GuiNovamenuCreateWorld(this);
+				ISaveHandler isavehandler = this.mc.getSaveLoader().getSaveLoader(this.getSaveFileName(this.selectedWorld), false);
+				WorldInfo worldinfo = isavehandler.loadWorldInfo();
+				isavehandler.flush();
+				guicreateworld.func_82286_a(worldinfo);
+				this.mc.displayGuiScreen(guicreateworld);
+			}
+			else {
+				GuiCreateWorld guicreateworld = new GuiCreateWorld(this);
+				ISaveHandler isavehandler = this.mc.getSaveLoader().getSaveLoader(this.getSaveFileName(this.selectedWorld), false);
+				WorldInfo worldinfo = isavehandler.loadWorldInfo();
+				isavehandler.flush();
+				guicreateworld.func_82286_a(worldinfo);
+				this.mc.displayGuiScreen(guicreateworld);
+			}
 			break;
 		}
 	}

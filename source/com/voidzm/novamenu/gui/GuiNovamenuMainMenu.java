@@ -7,6 +7,7 @@ package com.voidzm.novamenu.gui;
 
 import java.awt.Color;
 
+import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
@@ -39,7 +40,12 @@ public class GuiNovamenuMainMenu extends GuiNovamenuScreen {
 			mc.displayGuiScreen(new GuiNovamenuMultiplayer(this));
 			break;
 		case 2:
-			mc.displayGuiScreen(new GuiNovamenuOptions(this, this.mc.gameSettings));
+			if(NovamenuPlugin.getConfiguration().useCustomOptionsMenu) {
+				mc.displayGuiScreen(new GuiNovamenuOptions(this, this.mc.gameSettings));
+			}
+			else {
+				mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
+			}
 			break;
 		case 3:
 			mc.displayGuiScreen(new GuiNovamenuModList(this));

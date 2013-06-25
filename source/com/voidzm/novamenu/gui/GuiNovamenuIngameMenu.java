@@ -1,5 +1,8 @@
 package com.voidzm.novamenu.gui;
 
+import com.voidzm.novamenu.asm.NovamenuPlugin;
+
+import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.stats.StatList;
@@ -27,7 +30,12 @@ public class GuiNovamenuIngameMenu extends GuiNovamenuScreen {
 	public void buttonEvent(int id) {
 		switch(id) {
 			case 0:
-				this.mc.displayGuiScreen(new GuiNovamenuOptions(this, this.mc.gameSettings));
+				if(NovamenuPlugin.getConfiguration().useCustomOptionsMenu) {
+					mc.displayGuiScreen(new GuiNovamenuOptions(this, this.mc.gameSettings));
+				}
+				else {
+					mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
+				}
 				break;
 			case 1:
 				this.buttons.get(0).enabled = false;

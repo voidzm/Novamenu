@@ -1,6 +1,6 @@
 @echo off
 echo ---------------- Building ----------------
-echo ------------ Novamenu 1.0.2 --------------
+echo ------------ Novamenu 1.0.3 --------------
 xcopy ..\..\mcp\src ..\..\mcp\src-backup /E /I /Q
 echo Finished backing up forge sources.
 xcopy source ..\..\mcp\src\minecraft /E /Q
@@ -17,6 +17,6 @@ rmdir /S /Q src
 xcopy src-backup src /E /I /Q
 rmdir /S /Q src-backup
 cd reobf\minecraft
-jar cmf META-INF\MANIFEST.MF Novamenu1.0.2.jar com mods mcmod.info remap.csv
-echo ----- Build complete! Artifact is located at mcp\reobf\minecraft\Novamenu1.0.2.jar -----
+jar cmf META-INF\MANIFEST.MF Novamenu1.0.3.jar com mods mcmod.info remap.csv
+echo ----- Build complete! Artifact is located at mcp\reobf\minecraft\Novamenu1.0.3.jar -----
 pause

@@ -3,6 +3,8 @@ package com.voidzm.novamenu.gui;
 import cpw.mods.fml.client.FMLClientHandler;
 import java.util.ArrayList;
 
+import com.voidzm.novamenu.asm.NovamenuPlugin;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ModContainer;
 import net.minecraft.client.gui.GuiVideoSettings;
@@ -70,7 +72,7 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 				this.mc.gameSettings.saveOptions();
 				ArrayList<ModContainer> ofList = new ArrayList<ModContainer>();
 				FMLClientHandler.instance().addSpecialModEntries(ofList);
-				if(!ofList.isEmpty()) {
+				if(!ofList.isEmpty() || !NovamenuPlugin.getConfiguration().useCustomVideoSettingsMenu) {
 					this.mc.displayGuiScreen(new GuiVideoSettings(this, this.settings));
 				}
 				else {
