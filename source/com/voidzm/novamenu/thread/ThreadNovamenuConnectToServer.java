@@ -30,7 +30,7 @@ public class ThreadNovamenuConnectToServer extends Thread {
 		try {
 			GuiNovamenuConnecting.setNetClientHandler(this.connectingGui, new NetClientHandler(GuiNovamenuConnecting.func_74256_a(this.connectingGui), this.ip, this.port));
 			if(GuiNovamenuConnecting.isCancelled(this.connectingGui)) return;
-			GuiNovamenuConnecting.getNetClientHandler(this.connectingGui).addToSendQueue(new Packet2ClientProtocol(61, GuiNovamenuConnecting.func_74254_c(this.connectingGui).session.username, this.ip, this.port));
+			GuiNovamenuConnecting.getNetClientHandler(this.connectingGui).addToSendQueue(new Packet2ClientProtocol(61, GuiNovamenuConnecting.func_74254_c(this.connectingGui).func_110432_I().func_111285_a(), this.ip, this.port));
 		}
 		catch(UnknownHostException unknownhostexception){
 			if(GuiNovamenuConnecting.isCancelled(this.connectingGui)) return;

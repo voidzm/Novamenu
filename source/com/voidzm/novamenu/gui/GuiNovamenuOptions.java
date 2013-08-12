@@ -8,6 +8,7 @@ import com.voidzm.novamenu.asm.NovamenuPlugin;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.ModContainer;
 import net.minecraft.client.gui.GuiVideoSettings;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.EnumOptions;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.StatCollector;
@@ -31,7 +32,6 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 	}
 
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		this.buttons.clear();
 		this.buttons.add(new GuiSliderTransparent(this, 0, this.width / 2 - 155, this.height / 6 - 12, EnumOptions.MUSIC, this.settings.getKeyBinding(EnumOptions.MUSIC), this.settings.getOptionFloatValue(EnumOptions.MUSIC)));
 		this.buttons.add(new GuiSliderTransparent(this, 1, this.width / 2 + 5, this.height / 6 - 12, EnumOptions.SOUND, this.settings.getKeyBinding(EnumOptions.SOUND), this.settings.getOptionFloatValue(EnumOptions.SOUND)));
@@ -45,13 +45,13 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 		}
 		this.buttons.add(difficultyButton);
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height / 6 + 60, 150, 16, 6, this.settings.getKeyBinding(EnumOptions.TOUCHSCREEN)));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 90, 150, 16, 7, t.translateKey("options.video")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 90, 150, 16, 8, t.translateKey("options.controls")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 114, 150, 16, 9, t.translateKey("options.language")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 114, 150, 16, 10, t.translateKey("options.multiplayer.title")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 138, 150, 16, 11, t.translateKey("options.texture.pack")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 138, 150, 16, 12, t.translateKey("options.snooper.view")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 13, t.translateKey("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 90, 150, 16, 7, I18n.func_135053_a("options.video")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 90, 150, 16, 8, I18n.func_135053_a("options.controls")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 114, 150, 16, 9, I18n.func_135053_a("options.language")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 114, 150, 16, 10, I18n.func_135053_a("options.multiplayer.title")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 138, 150, 16, 11, I18n.func_135053_a("options.resourcepack")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 138, 150, 16, 12, I18n.func_135053_a("options.snooper.view")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 13, I18n.func_135053_a("gui.done")));
 	}
 
 	public void buttonEvent(int id) {
@@ -85,7 +85,7 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 				break;
 			case 9:
 				this.mc.gameSettings.saveOptions();
-				this.mc.displayGuiScreen(new GuiNovamenuLanguage(this, this.settings));
+				this.mc.displayGuiScreen(new GuiNovamenuLanguage(this, this.settings, this.mc.func_135016_M()));
 				break;
 			case 10:
 				this.mc.gameSettings.saveOptions();
@@ -93,7 +93,7 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 				break;
 			case 11:
 				this.mc.gameSettings.saveOptions();
-				this.mc.displayGuiScreen(new GuiNovamenuTexturePacks(this, this.settings));
+				this.mc.displayGuiScreen(new GuiNovamenuResourcePacks(this, this.settings));
 				break;
 			case 12:
 				this.mc.gameSettings.saveOptions();

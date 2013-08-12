@@ -33,7 +33,7 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 		else {
 			this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 205, this.height - 40, 200, 16, 1, StatCollector.translateToLocal("deathScreen.respawn")));
 			this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height - 40, 200, 16, 2, StatCollector.translateToLocal("deathScreen.titleScreen")));
-			if(this.mc.session == null) {
+			if(this.mc.func_110432_I() == null) {
 				((GuiButtonTransparent)this.buttons.get(1)).enabled = false;
 			}
 		}
@@ -87,7 +87,7 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-		if(this.mc.thePlayer.getHealth() > 0) {
+		if(this.mc.thePlayer.func_110143_aJ() > 0.0F) {
 			this.mc.displayGuiScreen((GuiScreen)null);
 		}
 	}

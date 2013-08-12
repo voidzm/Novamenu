@@ -10,6 +10,7 @@ import java.util.Random;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -76,22 +77,21 @@ public class GuiNovamenuCreateWorld extends GuiNovamenuScreen {
 	
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		Keyboard.enableRepeatEvents(true);
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height - 28, 150, 16, 0, t.translateKey("selectWorld.create")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height - 28, 150, 16, 1, t.translateKey("gui.cancel")));
-		this.buttons.add(this.buttonGamemode = new GuiButtonTransparent(this, this.width / 2 - 75, 115, 150, 16, 2, t.translateKey("selectWorld.gameMode")));
-		this.buttons.add(this.buttonMoreOptions = new GuiButtonTransparent(this, this.width / 2 - 75, 187, 150, 16, 3, t.translateKey("selectWorld.moreWorldOptions")));
-		this.buttons.add(this.buttonGenStructures = new GuiButtonTransparent(this, this.width / 2 - 155, 100, 150, 16, 4, t.translateKey("selectWorld.mapFeatures")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height - 28, 150, 16, 0, I18n.func_135053_a("selectWorld.create")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height - 28, 150, 16, 1, I18n.func_135053_a("gui.cancel")));
+		this.buttons.add(this.buttonGamemode = new GuiButtonTransparent(this, this.width / 2 - 75, 115, 150, 16, 2, I18n.func_135053_a("selectWorld.gameMode")));
+		this.buttons.add(this.buttonMoreOptions = new GuiButtonTransparent(this, this.width / 2 - 75, 187, 150, 16, 3, I18n.func_135053_a("selectWorld.moreWorldOptions")));
+		this.buttons.add(this.buttonGenStructures = new GuiButtonTransparent(this, this.width / 2 - 155, 100, 150, 16, 4, I18n.func_135053_a("selectWorld.mapFeatures")));
 		this.buttonGenStructures.drawButton = false;
-		this.buttons.add(this.buttonBonusChest = new GuiButtonTransparent(this, this.width / 2 + 5, 151, 150, 16, 7, t.translateKey("selectWorld.bonusItems")));
+		this.buttons.add(this.buttonBonusChest = new GuiButtonTransparent(this, this.width / 2 + 5, 151, 150, 16, 7, I18n.func_135053_a("selectWorld.bonusItems")));
 		this.buttonBonusChest.drawButton = false;
-		this.buttons.add(this.buttonWorldType = new GuiButtonTransparent(this, this.width / 2 + 5, 100, 150, 16, 5, t.translateKey("selectWorld.mapType")));
+		this.buttons.add(this.buttonWorldType = new GuiButtonTransparent(this, this.width / 2 + 5, 100, 150, 16, 5, I18n.func_135053_a("selectWorld.mapType")));
 		this.buttonWorldType.drawButton = false;
-		this.buttons.add(this.buttonAllowCheats = new GuiButtonTransparent(this, this.width / 2 - 155, 151, 150, 16, 6, t.translateKey("selectWorld.allowCommands")));
+		this.buttons.add(this.buttonAllowCheats = new GuiButtonTransparent(this, this.width / 2 - 155, 151, 150, 16, 6, I18n.func_135053_a("selectWorld.allowCommands")));
 		this.buttonAllowCheats.drawButton = false;
-		this.buttons.add(this.buttonCustomize = new GuiButtonTransparent(this, this.width / 2 + 5, 120, 150, 16, 8, t.translateKey("selectWorld.customizeType")));
+		this.buttons.add(this.buttonCustomize = new GuiButtonTransparent(this, this.width / 2 + 5, 120, 150, 16, 8, I18n.func_135053_a("selectWorld.customizeType")));
 		this.buttonCustomize.drawButton = false;
 		this.textWorldName = new GuiTextField(this.fontRenderer, this.width / 2 - 100, 60, 200, 20);
 		this.textWorldName.setFocused(true);
@@ -118,31 +118,30 @@ public class GuiNovamenuCreateWorld extends GuiNovamenuScreen {
 	}
 	
 	private void updateButtonText() {
-		StringTranslate t = StringTranslate.getInstance();
-		this.buttonGamemode.text = t.translateKey("selectWorld.gameMode") + " " + t.translateKey("selectWorld.gameMode." + this.gamemode);
-		this.gamemodeLine1 = t.translateKey("selectWorld.gameMode." + this.gamemode + ".line1");
-		this.gamemodeLine2 = t.translateKey("selectWorld.gameMode." + this.gamemode + ".line2");
-		this.buttonGenStructures.text = t.translateKey("selectWorld.mapFeatures") + " ";
+		this.buttonGamemode.text = I18n.func_135053_a("selectWorld.gameMode") + " " + I18n.func_135053_a("selectWorld.gameMode." + this.gamemode);
+		this.gamemodeLine1 = I18n.func_135053_a("selectWorld.gameMode." + this.gamemode + ".line1");
+		this.gamemodeLine2 = I18n.func_135053_a("selectWorld.gameMode." + this.gamemode + ".line2");
+		this.buttonGenStructures.text = I18n.func_135053_a("selectWorld.mapFeatures") + " ";
 		if(this.generateStructures) {
-			this.buttonGenStructures.text = this.buttonGenStructures.text + t.translateKey("options.on");
+			this.buttonGenStructures.text = this.buttonGenStructures.text + I18n.func_135053_a("options.on");
 		}
 		else {
-			this.buttonGenStructures.text = this.buttonGenStructures.text + t.translateKey("options.off");
+			this.buttonGenStructures.text = this.buttonGenStructures.text + I18n.func_135053_a("options.off");
 		}
-		this.buttonBonusChest.text = t.translateKey("selectWorld.bonusItems") + " ";
+		this.buttonBonusChest.text = I18n.func_135053_a("selectWorld.bonusItems") + " ";
 		if(this.bonusChest && !this.isHardcore) {
-			this.buttonBonusChest.text = this.buttonBonusChest.text + t.translateKey("options.on");
+			this.buttonBonusChest.text = this.buttonBonusChest.text + I18n.func_135053_a("options.on");
 		}
 		else {
-			this.buttonBonusChest.text = this.buttonBonusChest.text + t.translateKey("options.off");
+			this.buttonBonusChest.text = this.buttonBonusChest.text + I18n.func_135053_a("options.off");
 		}
-		this.buttonWorldType.text = t.translateKey("selectWorld.mapType") + " " + t.translateKey(WorldType.worldTypes[this.worldTypeID].getTranslateName());
-		this.buttonAllowCheats.text = t.translateKey("selectWorld.allowCommands") + " ";
+		this.buttonWorldType.text = I18n.func_135053_a("selectWorld.mapType") + " " + I18n.func_135053_a(WorldType.worldTypes[this.worldTypeID].getTranslateName());
+		this.buttonAllowCheats.text = I18n.func_135053_a("selectWorld.allowCommands") + " ";
 		if(this.allowCheats && !this.isHardcore) {
-			this.buttonAllowCheats.text = this.buttonAllowCheats.text + t.translateKey("options.on");
+			this.buttonAllowCheats.text = this.buttonAllowCheats.text + I18n.func_135053_a("options.on");
 		}
 		else {
-			this.buttonAllowCheats.text = this.buttonAllowCheats.text + t.translateKey("options.off");
+			this.buttonAllowCheats.text = this.buttonAllowCheats.text + I18n.func_135053_a("options.off");
 		}
 	}
 	
@@ -290,14 +289,11 @@ public class GuiNovamenuCreateWorld extends GuiNovamenuScreen {
 		this.buttonWorldType.drawButton = this.moreOptions;
 		this.buttonAllowCheats.drawButton = this.moreOptions;
 		this.buttonCustomize.drawButton = this.moreOptions && (WorldType.worldTypes[this.worldTypeID].isCustomizable());
-		StringTranslate t;
 		if(this.moreOptions){
-			t = StringTranslate.getInstance();
-			this.buttonMoreOptions.text = t.translateKey("gui.done");
+			this.buttonMoreOptions.text = I18n.func_135053_a("gui.done");
 		}
 		else {
-			t = StringTranslate.getInstance();
-			this.buttonMoreOptions.text = t.translateKey("selectWorld.moreWorldOptions");
+			this.buttonMoreOptions.text = I18n.func_135053_a("selectWorld.moreWorldOptions");
 		}
 	}
 
@@ -333,18 +329,17 @@ public class GuiNovamenuCreateWorld extends GuiNovamenuScreen {
 	public void drawScreenForeground(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
-		StringTranslate t = StringTranslate.getInstance();
-		this.drawCenteredString(this.fontRenderer, t.translateKey("selectWorld.create"), this.width / 2, 20, 16777215);
+		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("selectWorld.create"), this.width / 2, 20, 16777215);
 		if(this.moreOptions) {
-			this.drawString(this.fontRenderer, t.translateKey("selectWorld.enterSeed"), this.width / 2 - 100, 47, 10526880);
-			this.drawString(this.fontRenderer, t.translateKey("selectWorld.seedInfo"), this.width / 2 - 100, 85, 10526880);
-			this.drawString(this.fontRenderer, t.translateKey("selectWorld.mapFeatures.info"), this.width / 2 - 150, 122, 10526880);
-			this.drawString(this.fontRenderer, t.translateKey("selectWorld.allowCommands.info"), this.width / 2 - 150, 172, 10526880);
+			this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.enterSeed"), this.width / 2 - 100, 47, 10526880);
+			this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.seedInfo"), this.width / 2 - 100, 85, 10526880);
+			this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.mapFeatures.info"), this.width / 2 - 150, 122, 10526880);
+			this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.allowCommands.info"), this.width / 2 - 150, 172, 10526880);
 			this.textWorldSeed.drawTextBox();
 		}
 		else {
-			this.drawString(this.fontRenderer, t.translateKey("selectWorld.enterName"), this.width / 2 - 100, 47, 10526880);
-			this.drawString(this.fontRenderer, t.translateKey("selectWorld.resultFolder") + " " + this.folderName, this.width / 2 - 100, 85, 10526880);
+			this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.enterName"), this.width / 2 - 100, 47, 10526880);
+			this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.resultFolder") + " " + this.folderName, this.width / 2 - 100, 85, 10526880);
 			this.textWorldName.drawTextBox();
 			this.drawString(this.fontRenderer, this.gamemodeLine1, this.width / 2 - 100, 137, 10526880);
 			this.drawString(this.fontRenderer, this.gamemodeLine2, this.width / 2 - 100, 149, 10526880);

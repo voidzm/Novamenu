@@ -1,6 +1,7 @@
 package com.voidzm.novamenu.gui;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.LanServer;
 import net.minecraft.client.multiplayer.ServerData;
@@ -128,7 +129,7 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 			this.parent.drawString(this.parent.getFontRenderer(), StatCollector.translateToLocal("selectServer.hiddenAddress"), par2 + 2, par3 + 12 + 11, 5263440);
 		}
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.parent.getMinecraft().renderEngine.bindTexture("/gui/icons.png");
+		this.parent.getMinecraft().renderEngine.func_110577_a(Gui.field_110324_m);
 		byte b0 = 0;
 		String s1 = "";
 		int i1;

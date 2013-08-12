@@ -1,6 +1,7 @@
 package com.voidzm.novamenu.gui;
 
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.EnumOptions;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.StatCollector;
@@ -27,8 +28,7 @@ public class GuiNovamenuVideoSettings extends GuiNovamenuScreen {
 
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
-		this.screenTitle = t.translateKey("options.videoTitle");
+		this.screenTitle = I18n.func_135053_a("options.videoTitle");
 		this.buttons.clear();
 		this.is64Bit = false;
 		String[] astring = new String[] {"sun.arch.data.model", "com.ibm.vm.bitmode", "os.arch"};
@@ -57,7 +57,7 @@ public class GuiNovamenuVideoSettings extends GuiNovamenuScreen {
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height / 7 + 120 + h, 150, 16, 11, this.settings.getKeyBinding(EnumOptions.USE_SERVER_TEXTURES)));
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height / 7 + 144 + h, 150, 16, 12, this.settings.getKeyBinding(EnumOptions.USE_FULLSCREEN)));
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height / 7 + 144 + h, 150, 16, 13, this.settings.getKeyBinding(EnumOptions.ENABLE_VSYNC)));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 14, t.translateKey("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 14, I18n.func_135053_a("gui.done")));
 	}
 
 	@Override

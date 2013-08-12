@@ -13,13 +13,13 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
 @TransformerExclusions(value={"com.voidzm.novamenu.asm", "com.voidzm.novamenu.gui"})
-@MCVersion(value="1.5.2")
+@MCVersion(value="1.6.2")
 public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 
 	public static File location;
 	public static boolean isDevEnvironment = true;
-	public static String minecraftVersion = "1.5.2";
-	public static String novamenuVersion = "1.0.3";
+	public static String minecraftVersion = "1.6.2";
+	public static String novamenuVersion = "1.1.0";
 	
 	private static NovamenuPlugin instance;
 	
@@ -53,17 +53,17 @@ public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 
 	@Override
 	public String[] getASMTransformerClass() {
-		return new String[]{"com.voidzm.novamenu.asm.NovamenuTransformer"};
+		return new String[]{NovamenuTransformer.class.getName()};
 	}
 
 	@Override
 	public String getModContainerClass() {
-		return "com.voidzm.novamenu.asm.NovamenuModContainer";
+		return NovamenuModContainer.class.getName();
 	}
 
 	@Override
 	public String getSetupClass() {
-		return "com.voidzm.novamenu.asm.NovamenuPlugin";
+		return NovamenuPlugin.class.getName();
 	}
 
 	@Override

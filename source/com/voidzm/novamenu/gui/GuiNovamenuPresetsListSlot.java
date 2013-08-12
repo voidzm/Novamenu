@@ -5,6 +5,7 @@
 
 package com.voidzm.novamenu.gui;
 
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
@@ -38,7 +39,11 @@ public class GuiNovamenuPresetsListSlot extends GuiNovamenuSlot {
 
 	private void func_82455_b(int par1, int par2, int par3, int par4) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.parent.getMinecraft().renderEngine.bindTexture("/gui/slot.png");
+		this.parent.getMinecraft().func_110434_K().func_110577_a(Gui.field_110323_l);
+		float f = 0.0078125F;
+		float f1 = 0.0078125F;
+		boolean flag = true;
+		boolean flag1 = true;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 18), (double)this.parent.getZLevel(), (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));

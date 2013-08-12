@@ -3,6 +3,7 @@ package com.voidzm.novamenu.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
@@ -78,11 +79,12 @@ public class GuiNovamenuControlsSlot extends GuiNovamenuSlot {
 		xPosition -= 20;
 		boolean flag = mx >= xPosition && my >= yPosition && mx < xPosition + width && my < yPosition + height;
 		int k = (flag ? 2 : 1);
-		Minecraft.getMinecraft().renderEngine.bindTexture("/gui/gui.png");
+		ResourceLocation rsrcLoc = new ResourceLocation("textures/gui/widgets.png");
+		Minecraft.getMinecraft().func_110434_K().func_110577_a(rsrcLoc);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		parent.drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);
 		parent.drawTexturedModalRect(xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height);
-		parent.drawString(Minecraft.getMinecraft().fontRenderer, settings.getKeyBindingDescription(index), xPosition + width + 4, yPosition + 6, 0xFFFFFFFF);
+		parent.drawString(parent.getFontRenderer(), settings.getKeyBindingDescription(index), xPosition + width + 4, yPosition + 6, 0xFFFFFFFF);
 		boolean conflict = false;
 		for(int x = 0; x < settings.keyBindings.length; x++) {
 			if(x != index && settings.keyBindings[x].keyCode == settings.keyBindings[index].keyCode) {

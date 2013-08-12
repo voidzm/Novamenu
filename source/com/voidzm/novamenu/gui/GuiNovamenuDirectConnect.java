@@ -2,6 +2,7 @@ package com.voidzm.novamenu.gui;
 
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.input.Keyboard;
@@ -27,11 +28,10 @@ public class GuiNovamenuDirectConnect extends GuiNovamenuScreen {
 
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		Keyboard.enableRepeatEvents(true);
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 96 + 12, 200, 16, 0, t.translateKey("selectServer.select")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 1, t.translateKey("gui.cancel")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 96 + 12, 200, 16, 0, I18n.func_135053_a("selectServer.select")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 1, I18n.func_135053_a("gui.cancel")));
 		this.serverAddress = new GuiTextField(this.fontRenderer, this.width / 2 - 100, 116, 200, 20);
 		this.serverAddress.setMaxStringLength(128);
 		this.serverAddress.setFocused(true);
@@ -81,9 +81,8 @@ public class GuiNovamenuDirectConnect extends GuiNovamenuScreen {
 	public void drawScreenForeground(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
-		StringTranslate t = StringTranslate.getInstance();
-		this.drawCenteredString(this.fontRenderer, t.translateKey("selectServer.direct"), this.width / 2, this.height / 4 - 60 + 20, 16777215);
-		this.drawString(this.fontRenderer, t.translateKey("addServer.enterIp"), this.width / 2 - 100, 100, 10526880);
+		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("selectServer.direct"), this.width / 2, this.height / 4 - 60 + 20, 16777215);
+		this.drawString(this.fontRenderer, I18n.func_135053_a("addServer.enterIp"), this.width / 2 - 100, 100, 10526880);
 		this.serverAddress.drawTextBox();
 	}
 

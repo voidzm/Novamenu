@@ -24,12 +24,20 @@ import com.voidzm.novamenu.gui.GuiNovamenuDisconnected;
 
 public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 
+	private boolean showDebugInfoFieldTransformed = false;
+	private boolean guiGameOverTypeTransformed = false;
+	private boolean guiGameOverMethodTransformed = false;
+	
 	public DisplayGuiScreenMethodVisitor(MethodVisitor visitor) {
 		super(ASM4, visitor);
 	}
 
 	@Override
 	public void visitCode() {
+		if(NovamenuTransformer.doVerboseTransformer) {
+			System.out.println("Transforming Minecraft.displayGuiScreen method head.");
+		}
+		
 		mv.visitVarInsn(ALOAD, 1);
 		mv.visitTypeInsn(INSTANCEOF, "net/minecraft/client/gui/GuiIngameMenu");
 		Label j1 = new Label();
@@ -56,8 +64,18 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 	
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
+		if(this.showDebugInfoFieldTransformed == true) {
+			mv.visitFieldInsn(opcode, owner, name, desc);
+			return;
+		}
 		String fieldName = NovamenuPlugin.isDevEnvironment ? "showDebugInfo" : ReobfuscationMappingHelper.getInstance().attemptRemapFieldName("net.minecraft.client.settings.GameSettings/showDebugInfo");
+		if(NovamenuTransformer.doVerboseTransformer) {
+			System.out.println("Locating GameSettings.showDebugInfo, comparing " + name + " to target " + fieldName + ".");
+		}
 		if(opcode == PUTFIELD && name.equals(fieldName)) {
+			if(NovamenuTransformer.doVerboseTransformer) {
+				System.out.println("GameSettings.showDebugInfo located under " + name);
+			}
 			mv.visitVarInsn(ALOAD, 1);
 			mv.visitTypeInsn(INSTANCEOF, "net/minecraft/client/gui/GuiMainMenu");
 			Label j1 = new Label();
@@ -67,6 +85,7 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 			mv.visitMethodInsn(INVOKESPECIAL, "com/voidzm/novamenu/gui/GuiNovamenuMainMenu", "<init>", "()V");
 			mv.visitVarInsn(ASTORE, 1);
 			mv.visitLabel(j1);
+			this.showDebugInfoFieldTransformed = true;
 		}
 		mv.visitFieldInsn(opcode, owner, name, desc);
 	}
@@ -74,8 +93,16 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 	
 	@Override
 	public void visitTypeInsn(int opcode, String type)  {
+		if(this.guiGameOverTypeTransformed == true) {
+			mv.visitTypeInsn(opcode, type);
+			return;
+		}
 		if(opcode == NEW && type.equals("net/minecraft/client/gui/GuiGameOver")) {
+			if(NovamenuTransformer.doVerboseTransformer) {
+				System.out.println("Transforming GuiGameOver type INSN.");
+			}
 			mv.visitTypeInsn(NEW, "com/voidzm/novamenu/gui/GuiNovamenuGameOver");
+			this.guiGameOverTypeTransformed = true;
 		}
 		else {
 			mv.visitTypeInsn(opcode, type);
@@ -84,8 +111,16 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 	
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc) {
+		if(this.guiGameOverMethodTransformed == true) {
+			mv.visitMethodInsn(opcode, owner, name, desc);
+			return;
+		}
 		if(opcode == INVOKESPECIAL && owner.equals("net/minecraft/client/gui/GuiGameOver") && name.equals("<init>") && desc.equals("()V")) {
+			if(NovamenuTransformer.doVerboseTransformer) {
+				System.out.println("Transforming GuiGameOver method INSN.");
+			}
 			mv.visitMethodInsn(INVOKESPECIAL, "com/voidzm/novamenu/gui/GuiNovamenuGameOver", "<init>", "()V");
+			this.guiGameOverMethodTransformed = true;
 		}
 		else {
 			mv.visitMethodInsn(opcode, owner, name, desc);

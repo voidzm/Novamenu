@@ -2,51 +2,62 @@ package com.voidzm.novamenu.gui;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
+import net.minecraft.client.gui.GuiLanguage;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.Language;
 import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class GuiNovamenuLanguageSlot extends GuiNovamenuSlot {
 
 	private final GuiNovamenuLanguage parent;
 	
-	private ArrayList arrayList;
-	private TreeMap treeMap;
+	private List list;
+	private Map map;
 
 	public GuiNovamenuLanguageSlot(GuiNovamenuLanguage screen) {
 		super(screen.getMinecraft(), screen.width, screen.height, 40, screen.height - 60, 18);
 		this.parent = screen;
-		this.treeMap = StringTranslate.getInstance().getLanguageList();
-		this.arrayList = new ArrayList();
-		Iterator iterator = this.treeMap.keySet().iterator();
+		this.map = Maps.newHashMap();
+		this.list = Lists.newArrayList();
+		Iterator iterator = GuiNovamenuLanguage.getLanguageManager(screen).func_135040_d().iterator();
 		while(iterator.hasNext()) {
-			String s = (String)iterator.next();
-			this.arrayList.add(s);
+			Language language = (Language)iterator.next();
+			this.map.put(language.func_135034_a(), language);
+			this.list.add(language.func_135034_a());
 		}
 	}
 
 	@Override
 	protected int getSize() {
-		return this.arrayList.size();
+		return this.list.size();
 	}
 
 	@Override
 	protected void elementClicked(int par1, boolean par2) {
-		StringTranslate.getInstance().setLanguage((String)this.arrayList.get(par1), false);
-		this.parent.getMinecraft().fontRenderer.setUnicodeFlag(StringTranslate.getInstance().isUnicode());
-		GuiNovamenuLanguage.getGameSettings(this.parent).language = (String)this.arrayList.get(par1);
-		this.parent.getFontRenderer().setBidiFlag(StringTranslate.isBidirectional(GuiNovamenuLanguage.getGameSettings(this.parent).language));
-		GuiNovamenuLanguage.getDoneButton(this.parent).text = StringTranslate.getInstance().translateKey("gui.done");
+		Language language = (Language)this.map.get(this.list.get(par1));
+		GuiNovamenuLanguage.getLanguageManager(this.parent).func_135045_a(language);
+		GuiNovamenuLanguage.getGameSettings(this.parent).language = language.func_135034_a();
+		this.parent.getMinecraft().func_110436_a();
+		this.parent.getFontRenderer().setUnicodeFlag(GuiNovamenuLanguage.getLanguageManager(this.parent).func_135042_a());
+		this.parent.getFontRenderer().setBidiFlag(GuiNovamenuLanguage.getLanguageManager(this.parent).func_135044_b());
+		GuiNovamenuLanguage.getDoneButton(this.parent).text = I18n.func_135053_a("gui.done");
 		GuiNovamenuLanguage.getGameSettings(this.parent).saveOptions();
 	}
 
 	@Override
 	protected boolean isSelected(int i) {
-		return ((String)this.arrayList.get(i)).equals(StringTranslate.getInstance().getCurrentLanguage());
+		return ((String)this.list.get(i)).equals(GuiNovamenuLanguage.getLanguageManager(this.parent).func_135041_c().func_135034_a());
 	}
 
 	@Override
@@ -56,16 +67,9 @@ public class GuiNovamenuLanguageSlot extends GuiNovamenuSlot {
 
 	@Override
 	protected void drawSlot(int par1, int par2, int par3, int par4, Tessellator par5Tessellator) {
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_SCISSOR_TEST);
-		ScaledResolution res = new ScaledResolution(GuiNovamenuLanguage.getGameSettings(this.parent), parent.getMinecraft().displayWidth, parent.getMinecraft().displayHeight);
-		int f = res.getScaleFactor();
-		GL11.glScissor(0, 61*f, parent.width*f, (parent.height-102)*f);
 		this.parent.getFontRenderer().setBidiFlag(true);
-		this.parent.drawCenteredString(this.parent.getFontRenderer(), (String)this.treeMap.get(this.arrayList.get(par1)), this.parent.width / 2, par3 + 1, 16777215);
-		this.parent.getFontRenderer().setBidiFlag(StringTranslate.isBidirectional(GuiNovamenuLanguage.getGameSettings(this.parent).language));
-		GL11.glDisable(GL11.GL_SCISSOR_TEST);
-		GL11.glPopMatrix();
+		this.parent.drawCenteredString(this.parent.getFontRenderer(), (String)this.map.get(this.list.get(par1)).toString(), this.parent.width / 2, par3 + 1, 16777215);
+		this.parent.getFontRenderer().setBidiFlag(GuiNovamenuLanguage.getLanguageManager(this.parent).func_135041_c().func_135035_b());
 	}
 
 }

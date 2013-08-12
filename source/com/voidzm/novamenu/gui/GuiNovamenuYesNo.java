@@ -5,6 +5,7 @@
 
 package com.voidzm.novamenu.gui;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StringTranslate;
 
 public class GuiNovamenuYesNo extends GuiNovamenuScreen {
@@ -23,9 +24,8 @@ public class GuiNovamenuYesNo extends GuiNovamenuScreen {
 		this.message1 = par2Str;
 		this.message2 = par3Str;
 		this.worldNumber = par4;
-		StringTranslate stringtranslate = StringTranslate.getInstance();
-		this.buttonText1 = stringtranslate.translateKey("gui.yes");
-		this.buttonText2 = stringtranslate.translateKey("gui.no");
+		this.buttonText1 = I18n.func_135053_a("gui.yes");
+		this.buttonText2 = I18n.func_135053_a("gui.no");
 		this.imageTick = par1GuiScreen.imageTick;
 	}
 

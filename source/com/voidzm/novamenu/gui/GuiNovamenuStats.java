@@ -1,8 +1,10 @@
 package com.voidzm.novamenu.gui;
 
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.util.StatCollector;
@@ -45,14 +47,13 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 	}
 
 	public void addHeaderButtons() {
-		StringTranslate t = StringTranslate.getInstance();
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 71, this.height - 28, 150, 16, 0, t.translateKey("gui.done")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 52, 100, 16, 1, t.translateKey("stat.generalButton")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 71, this.height - 28, 150, 16, 0, I18n.func_135053_a("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 52, 100, 16, 1, I18n.func_135053_a("stat.generalButton")));
 		GuiButtonTransparent guibutton;
-		this.buttons.add(guibutton = new GuiButtonTransparent(this, this.width / 2 - 46, this.height - 52, 100, 16, 2, t.translateKey("stat.blocksButton")));
+		this.buttons.add(guibutton = new GuiButtonTransparent(this, this.width / 2 - 46, this.height - 52, 100, 16, 2, I18n.func_135053_a("stat.blocksButton")));
 		GuiButtonTransparent guibutton1;
-		this.buttons.add(guibutton1 = new GuiButtonTransparent(this, this.width / 2 + 62, this.height - 52, 100, 16, 3, t.translateKey("stat.itemsButton")));
+		this.buttons.add(guibutton1 = new GuiButtonTransparent(this, this.width / 2 + 62, this.height - 52, 100, 16, 3, I18n.func_135053_a("stat.itemsButton")));
 		if(this.blockSlot.getSize() == 0) {
 			guibutton.enabled = false;
 		}
@@ -109,7 +110,7 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 
 	private void drawSprite(int par1, int par2, int par3, int par4) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.bindTexture("/gui/slot.png");
+		this.mc.renderEngine.func_110577_a(Gui.field_110323_l);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 18), (double)this.zLevel, (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));

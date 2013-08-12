@@ -5,6 +5,8 @@
 
 package com.voidzm.novamenu.gui;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
@@ -44,7 +46,11 @@ public class GuiNovamenuFlatWorldListSlot extends GuiNovamenuSlot {
 
 	private void func_82450_b(int par1, int par2, int par3, int par4){
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.parent.getMinecraft().renderEngine.bindTexture("/gui/slot.png");
+		this.parent.getMinecraft().func_110434_K().func_110577_a(Gui.field_110323_l);
+		float f = 0.0078125F;
+		float f1 = 0.0078125F;
+		boolean flag = true;
+		boolean flag1 = true;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 18), (double)this.parent.getZLevel(), (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
@@ -75,7 +81,7 @@ public class GuiNovamenuFlatWorldListSlot extends GuiNovamenuSlot {
 	protected void drawSlot(int par1, int par2, int par3, int par4, Tessellator par5Tessellator) {
 		FlatLayerInfo flatlayerinfo = (FlatLayerInfo)GuiNovamenuCreateFlatWorld.func_82271_a(this.parent).getFlatLayers().get(GuiNovamenuCreateFlatWorld.func_82271_a(this.parent).getFlatLayers().size() - par1 - 1);
 		ItemStack itemstack = flatlayerinfo.getFillBlock() == 0 ? null : new ItemStack(flatlayerinfo.getFillBlock(), 1, flatlayerinfo.getFillBlockMeta());
-		String s = itemstack == null ? "Air" : Item.itemsList[flatlayerinfo.getFillBlock()].func_77653_i(itemstack);
+		String s = itemstack == null ? "Air" : Item.itemsList[flatlayerinfo.getFillBlock()].getItemStackDisplayName(itemstack);
 		this.func_82452_a(par2, par3, itemstack);
 		this.parent.getFontRenderer().drawString(s, par2 + 18 + 5, par3 + 3, 16777215);
 		String s1;

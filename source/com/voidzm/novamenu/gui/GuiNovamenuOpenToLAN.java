@@ -1,6 +1,8 @@
 package com.voidzm.novamenu.gui;
 
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringTranslate;
 import net.minecraft.world.EnumGameType;
@@ -29,14 +31,13 @@ public class GuiNovamenuOpenToLAN extends GuiNovamenuScreen {
 	}
 
 	private void setupButtons() {
-		StringTranslate t = StringTranslate.getInstance();
-		this.buttonGamemode.text = t.translateKey("selectWorld.gameMode") + " " + t.translateKey("selectWorld.gameMode." + this.gamemode);
-		this.buttonAllowCommands.text = t.translateKey("selectWorld.allowCommands") + " ";
+		this.buttonGamemode.text = I18n.func_135053_a("selectWorld.gameMode") + " " + I18n.func_135053_a("selectWorld.gameMode." + this.gamemode);
+		this.buttonAllowCommands.text = I18n.func_135053_a("selectWorld.allowCommands") + " ";
 		if(this.allowCommands) {
-			this.buttonAllowCommands.text = this.buttonAllowCommands.text + t.translateKey("options.on");
+			this.buttonAllowCommands.text = this.buttonAllowCommands.text + I18n.func_135053_a("options.on");
 		}
 		else {
-			this.buttonAllowCommands.text = this.buttonAllowCommands.text + t.translateKey("options.off");
+			this.buttonAllowCommands.text = this.buttonAllowCommands.text + I18n.func_135053_a("options.off");
 		}
 	}
 
@@ -46,14 +47,14 @@ public class GuiNovamenuOpenToLAN extends GuiNovamenuScreen {
 			case 0:
 				this.mc.displayGuiScreen((GuiScreen)null);
 				String s = this.mc.getIntegratedServer().shareToLAN(EnumGameType.getByName(this.gamemode), this.allowCommands);
-				String s1 = "";
+				ChatMessageComponent cmc;
 				if(s != null) {
-					s1 = this.mc.thePlayer.translateString("commands.publish.started", new Object[] {s});
+					cmc = ChatMessageComponent.func_111082_b("commands.publish.started", new Object[] {s});
 				}
 				else {
-					s1 = this.mc.thePlayer.translateString("commands.publish.failed", new Object[0]);
+					cmc = ChatMessageComponent.func_111066_d("commands.publish.failed");
 				}
-				this.mc.ingameGUI.getChatGUI().printChatMessage(s1);
+				this.mc.ingameGUI.getChatGUI().printChatMessage(cmc.func_111068_a(true));
 				break;
 			case 1:
 				this.mc.displayGuiScreen(this.parent);

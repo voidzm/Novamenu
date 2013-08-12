@@ -1,16 +1,25 @@
 package com.voidzm.novamenu.gui;
 
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.ResourcePack;
 import net.minecraft.util.ChatAllowedCharacters;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
 
-import scala.Array;
-
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.TextureFXManager;
 import cpw.mods.fml.common.ModContainer;
 
@@ -27,9 +36,8 @@ public class GuiModDetail extends GuiNovamenuScreen {
 	
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height - 33, 200, 16, 0, t.translateKey("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height - 33, 200, 16, 0, I18n.func_135053_a("gui.done")));
 	}
 	
 	@Override
@@ -49,27 +57,45 @@ public class GuiModDetail extends GuiNovamenuScreen {
 		super.drawScreenForeground(mx, my, tick);
 		String logoFile = this.mod.getMetadata().logoFile;
 		if(!logoFile.isEmpty()) {
-			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.mc.renderEngine.bindTexture(logoFile);
-			Dimension dim = TextureFXManager.instance().getTextureDimensions(logoFile);
-			double scaleX = dim.width / 200.0;
-			double scaleY = dim.height / 65.0;
-			double scale = 1.0;
-			if(scaleX > 1 || scaleY > 1) {
-				scale = 1.0 / Math.max(scaleX, scaleY);
+			TextureManager tm = mc.func_110434_K();
+			ResourcePack pack = FMLClientHandler.instance().getResourcePackFor(mod.getModId());
+			try {
+				BufferedImage logo = null;
+				if(pack != null) {
+					logo = pack.func_110586_a();
+				}
+				else {
+					InputStream logoResource = getClass().getResourceAsStream(logoFile);
+					if(logoResource != null) {
+						logo = ImageIO.read(logoResource);
+					}
+				}
+				if(logo != null) {
+					ResourceLocation rl = tm.func_110578_a("modlogo", new DynamicTexture(logo));
+					this.mc.renderEngine.func_110577_a(rl);
+					Dimension dim = new Dimension(logo.getWidth(), logo.getHeight());
+					double scaleX = dim.width / 200.0;
+					double scaleY = dim.height / 65.0;
+					double scale = 1.0;
+					if(scaleX > 1 || scaleY > 1) {
+						scale = 1.0 / Math.max(scaleX, scaleY);
+					}
+					dim.width *= scale;
+					dim.height *= scale;
+					int top = 15;
+					Tessellator t = Tessellator.instance;
+					t.startDrawingQuads();
+					t.addVertexWithUV((this.width / 2) - 100.0, top + dim.height, zLevel, 0, 1);
+					t.addVertexWithUV((this.width / 2) - 100.0 + dim.width, top + dim.height, zLevel, 1, 1);
+					t.addVertexWithUV((this.width / 2) - 100.0 + dim.width, top, zLevel, 1, 0);
+					t.addVertexWithUV((this.width / 2) - 100.0, top, zLevel, 0, 0);
+					t.draw();
+				}
 			}
-			dim.width *= scale;
-			dim.height *= scale;
-			int top = 15;
-			Tessellator t = Tessellator.instance;
-			t.startDrawingQuads();
-			t.addVertexWithUV((this.width / 2) - 100.0, top + dim.height, zLevel, 0, 1);
-			t.addVertexWithUV((this.width / 2) - 100.0 + dim.width, top + dim.height, zLevel, 1, 1);
-			t.addVertexWithUV((this.width / 2) - 100.0 + dim.width, top, zLevel, 1, 0);
-			t.addVertexWithUV((this.width / 2) - 100.0, top, zLevel, 0, 0);
-			t.draw();
-			GL11.glDisable(GL11.GL_BLEND);
+			catch(IOException e) {
+				;
+			}
 		}
 		int offset = 5;
 		int shift = 0;

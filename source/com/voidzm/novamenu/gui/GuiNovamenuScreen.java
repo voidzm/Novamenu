@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -34,7 +35,7 @@ public class GuiNovamenuScreen extends GuiScreen {
 	
 	public GuiNovamenuScreen() {
 		try {
-			background = ImageIO.read(this.getClass().getResourceAsStream("/mods/novamenu/textures/gui/bg.png"));
+			background = ImageIO.read(this.getClass().getResourceAsStream("/assets/minecraft/textures/gui/bg.png"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,7 +46,7 @@ public class GuiNovamenuScreen extends GuiScreen {
 	private void setupTextureIndexes() {
 		boolean tryToFindImage = true;
 		while(tryToFindImage) {
-			InputStream targetStream = this.getClass().getResourceAsStream("/mods/novamenu/textures/gui/bg"+(imageCount == 0 ? "" : imageCount+1)+".png");
+			InputStream targetStream = this.getClass().getResourceAsStream("/assets/minecraft/textures/gui/bg"+(imageCount == 0 ? "" : imageCount+1)+".png");
 			if(targetStream == null) {
 				tryToFindImage = false;
 			}
@@ -90,7 +91,8 @@ public class GuiNovamenuScreen extends GuiScreen {
 		float indexf = imageTick / imageTime;
 		int index = (int)Math.floor(indexf);
 		float progress = tickf - (imageTime * (float)index);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("%blur%/mods/novamenu/textures/gui/bg"+(index == 0 ? "" : index+1)+".png"));
+		ResourceLocation mainResourceLoc = new ResourceLocation("textures/gui/bg"+(index == 0 ? "" : index+1)+".png");
+		this.mc.renderEngine.func_110577_a(mainResourceLoc);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int[] locs = this.calcPositions();
 		this.drawTexture(locs[0], locs[1], locs[2], locs[3]);
@@ -100,7 +102,8 @@ public class GuiNovamenuScreen extends GuiScreen {
 			elapsed /= (double)transitionTime;
 			double alpha = calculateEasingFunction(elapsed);
 			int indexAdj = index < imageCount - 1 ? index + 1 : 0;
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("%blur%/mods/novamenu/textures/gui/bg"+(indexAdj == 0 ? "" : indexAdj+1)+".png"));
+			ResourceLocation secondaryResourceLoc = new ResourceLocation("textures/gui/bg"+(indexAdj == 0 ? "" : indexAdj+1)+".png");
+			this.mc.renderEngine.func_110577_a(secondaryResourceLoc);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glColor4d(1.0D, 1.0D, 1.0D, (double)alpha);

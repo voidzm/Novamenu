@@ -2,6 +2,7 @@ package com.voidzm.novamenu.gui;
 
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.input.Keyboard;
@@ -29,12 +30,11 @@ public class GuiNovamenuAddServer extends GuiNovamenuScreen {
 
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		Keyboard.enableRepeatEvents(true);
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 96 + 12, 200, 16, 0, t.translateKey("addServer.add")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 1, t.translateKey("gui.cancel")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, 142, 200, 16, 2, t.translateKey("addServer.hideAddress") + ": " + (this.newServerData.isHidingAddress() ? t.translateKey("gui.yes") : t.translateKey("gui.no"))));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 96 + 12, 200, 16, 0, I18n.func_135053_a("addServer.add")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 1, I18n.func_135053_a("gui.cancel")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, 142, 200, 16, 2, I18n.func_135053_a("addServer.hideAddress") + ": " + (this.newServerData.isHidingAddress() ? I18n.func_135053_a("gui.yes") : I18n.func_135053_a("gui.no"))));
 		this.serverName = new GuiTextField(this.fontRenderer, this.width / 2 - 100, 66, 200, 20);
 		this.serverName.setFocused(true);
 		this.serverName.setText(this.newServerData.serverName);
@@ -63,9 +63,8 @@ public class GuiNovamenuAddServer extends GuiNovamenuScreen {
 			this.parent.confirmClicked(false, 0);
 			break;
 		case 2:
-			StringTranslate t = StringTranslate.getInstance();
 			this.newServerData.setHideAddress(!this.newServerData.isHidingAddress());
-			((GuiButtonTransparent)this.buttons.get(2)).text = t.translateKey("addServer.hideAddress") + ": " + (this.newServerData.isHidingAddress() ? t.translateKey("gui.yes") : t.translateKey("gui.no"));
+			((GuiButtonTransparent)this.buttons.get(2)).text = I18n.func_135053_a("addServer.hideAddress") + ": " + (this.newServerData.isHidingAddress() ? I18n.func_135053_a("gui.yes") : I18n.func_135053_a("gui.no"));
 			break;
 		}
 	}
@@ -101,10 +100,9 @@ public class GuiNovamenuAddServer extends GuiNovamenuScreen {
 	public void drawScreenForeground(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
-		StringTranslate t = StringTranslate.getInstance();
-		this.drawCenteredString(this.fontRenderer, t.translateKey("addServer.title"), this.width / 2, 17, 16777215);
-		this.drawString(this.fontRenderer, t.translateKey("addServer.enterName"), this.width / 2 - 100, 53, 10526880);
-		this.drawString(this.fontRenderer, t.translateKey("addServer.enterIp"), this.width / 2 - 100, 94, 10526880);
+		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("addServer.title"), this.width / 2, 17, 16777215);
+		this.drawString(this.fontRenderer, I18n.func_135053_a("addServer.enterName"), this.width / 2 - 100, 53, 10526880);
+		this.drawString(this.fontRenderer, I18n.func_135053_a("addServer.enterIp"), this.width / 2 - 100, 94, 10526880);
 		this.serverName.drawTextBox();
 		this.serverAddress.drawTextBox();
 	}

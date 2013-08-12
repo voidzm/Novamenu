@@ -1,5 +1,6 @@
 package com.voidzm.novamenu.gui;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.StringTranslate;
 
@@ -26,11 +27,10 @@ public class GuiNovamenuControls extends GuiNovamenuScreen {
 	@Override
 	public void initGui() {
 		controlsSlot = new GuiNovamenuControlsSlot(this, settings);
-		StringTranslate t = StringTranslate.getInstance();
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height - 32, 200, 16, 200, t.translateKey("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height - 32, 200, 16, 200, I18n.func_135053_a("gui.done")));
 		controlsSlot.registerScrollButtons(buttons, 7, 8);
-		this.screenTitle = t.translateKey("controls.title");
+		this.screenTitle = I18n.func_135053_a("controls.title");
 	}
 
 	@Override

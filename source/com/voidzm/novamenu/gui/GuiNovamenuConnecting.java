@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.NetClientHandler;
 import net.minecraft.client.multiplayer.ServerAddress;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StringTranslate;
 
 import com.voidzm.novamenu.thread.ThreadNovamenuConnectToServer;
@@ -48,9 +49,8 @@ public class GuiNovamenuConnecting extends GuiNovamenuScreen {
 
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, t.translateKey("gui.cancel")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, I18n.func_135053_a("gui.cancel")));
 	}
 
 	@Override
@@ -70,13 +70,12 @@ public class GuiNovamenuConnecting extends GuiNovamenuScreen {
 	public void drawScreenForeground(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
-		StringTranslate t = StringTranslate.getInstance();
 		if(this.netHandler == null) {
-			this.drawCenteredString(this.fontRenderer, t.translateKey("connect.connecting"), this.width / 2, this.height / 2 - 50, 16777215);
+			this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("connect.connecting"), this.width / 2, this.height / 2 - 50, 16777215);
 			this.drawCenteredString(this.fontRenderer, "", this.width / 2, this.height / 2 - 10, 16777215);
 		}
 		else {
-			this.drawCenteredString(this.fontRenderer, t.translateKey("connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);
+			this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);
 			this.drawCenteredString(this.fontRenderer, this.netHandler.field_72560_a, this.width / 2, this.height / 2 - 10, 16777215);
 		}
 	}

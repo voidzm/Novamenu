@@ -1,31 +1,33 @@
 package com.voidzm.novamenu.gui;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.LanguageManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.StringTranslate;
 
 public class GuiNovamenuLanguage extends GuiNovamenuScreen {
 
 	private GuiNovamenuScreen parent;
-	private int updateTimer = -1;
 	private GuiNovamenuLanguageSlot languageSlot;
 	private GameSettings settings;
+	private LanguageManager languageManager;
 	private GuiButtonTransparent doneButton;
 	
 	public boolean isIngame = false;
 
-	public GuiNovamenuLanguage(GuiNovamenuScreen par1GuiScreen, GameSettings par2GameSettings) {
+	public GuiNovamenuLanguage(GuiNovamenuScreen par1GuiScreen, GameSettings par2GameSettings, LanguageManager par3LanguageManager) {
 		this.parent = par1GuiScreen;
 		this.imageTick = par1GuiScreen.imageTick;
 		if(par1GuiScreen instanceof GuiNovamenuOptions) {
 			this.isIngame = ((GuiNovamenuOptions)par1GuiScreen).isIngame;
 		}
 		this.settings = par2GameSettings;
+		this.languageManager = par3LanguageManager;
 	}
 
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
-		this.buttons.add(this.doneButton = new GuiButtonTransparent(this, this.width / 2 - 75, this.height - 26, 150, 16, 6, t.translateKey("gui.done")));
+		this.buttons.add(this.doneButton = new GuiButtonTransparent(this, this.width / 2 - 75, this.height - 26, 150, 16, 6, I18n.func_135053_a("gui.done")));
 		this.languageSlot = new GuiNovamenuLanguageSlot(this);
 		this.languageSlot.boxshift = 0;
 		this.languageSlot.registerScrollButtons(this.buttons, 7, 8);
@@ -43,10 +45,6 @@ public class GuiNovamenuLanguage extends GuiNovamenuScreen {
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
-		if(this.updateTimer <= 0) {
-			this.mc.texturePackList.updateAvaliableTexturePacks();
-			this.updateTimer += 20;
-		}
 		if(!isIngame) {
 			super.drawScreenBackground(par1, par2, par3);
 		}
@@ -57,15 +55,8 @@ public class GuiNovamenuLanguage extends GuiNovamenuScreen {
 		this.drawRect(0, height-60, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
 		this.languageSlot.drawScreen(par1, par2, par3);
-		StringTranslate t = StringTranslate.getInstance();
-		this.drawCenteredString(this.fontRenderer, t.translateKey("options.language"), this.width / 2, 18, 16777215);
-		this.drawCenteredString(this.fontRenderer, "(" + t.translateKey("options.languageWarning") + ")", this.width / 2, this.height - 46, 8421504);
-	}
-
-	@Override
-	public void updateScreen() {
-		super.updateScreen();
-		--this.updateTimer;
+		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("options.language"), this.width / 2, 18, 16777215);
+		this.drawCenteredString(this.fontRenderer, "(" + I18n.func_135053_a("options.languageWarning") + ")", this.width / 2, this.height - 46, 8421504);
 	}
 
 	public static GameSettings getGameSettings(GuiNovamenuLanguage par0GuiLanguage) {
@@ -74,6 +65,10 @@ public class GuiNovamenuLanguage extends GuiNovamenuScreen {
 
 	public static GuiButtonTransparent getDoneButton(GuiNovamenuLanguage par0GuiLanguage) {
 		return par0GuiLanguage.doneButton;
+	}
+	
+	public static LanguageManager getLanguageManager(GuiNovamenuLanguage par0GuiLanguage) {
+		return par0GuiLanguage.languageManager;
 	}
 
 }

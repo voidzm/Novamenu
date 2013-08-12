@@ -8,6 +8,7 @@ import cpw.mods.fml.client.GuiDupesFound;
 
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StringTranslate;
 
 public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
@@ -19,9 +20,8 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 	private final GuiNovamenuScreen parent;
 
 	public GuiNovamenuDisconnected(GuiNovamenuScreen par1GuiScreen, String par2Str, String par3Str, int tick, Object ... par4ArrayOfObj) {
-		StringTranslate t = StringTranslate.getInstance();
 		this.parent = par1GuiScreen;
-		this.errorMessage = t.translateKey(par2Str);
+		this.errorMessage = I18n.func_135053_a(par2Str);
 		this.errorDetail = par3Str;
 		this.messageArray = par4ArrayOfObj;
 		this.imageTick = tick;
@@ -59,14 +59,13 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, t.translateKey("gui.toMenu")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, I18n.func_135053_a("gui.toMenu")));
 		if(this.messageArray != null) {
-			this.messageList = this.fontRenderer.listFormattedStringToWidth(t.translateKeyFormat(this.errorDetail, this.messageArray), this.width - 50);
+			this.messageList = this.fontRenderer.listFormattedStringToWidth(I18n.func_135052_a(this.errorDetail, this.messageArray), this.width - 50);
 		}
 		else {
-			this.messageList = this.fontRenderer.listFormattedStringToWidth(t.translateKey(this.errorDetail), this.width - 50);
+			this.messageList = this.fontRenderer.listFormattedStringToWidth(I18n.func_135053_a(this.errorDetail), this.width - 50);
 		}
 	}
 	

@@ -17,6 +17,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiErrorScreen;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StringTranslate;
 import net.minecraft.world.EnumGameType;
@@ -55,8 +56,7 @@ public class GuiNovamenuSelectWorld extends GuiNovamenuScreen {
 	
 	@Override
 	public void initGui() {
-		StringTranslate t = StringTranslate.getInstance();
-		this.title = t.translateKey("selectWorld.title");
+		this.title = I18n.func_135053_a("selectWorld.title");
 		try {
 			this.loadSaves();
 		} catch(AnvilConverterException e) {
@@ -64,11 +64,11 @@ public class GuiNovamenuSelectWorld extends GuiNovamenuScreen {
 			this.mc.displayGuiScreen(new GuiErrorScreen("Unable to load worlds!", e.getMessage()));
 			return;
 		}
-		this.localizedWorldText = t.translateKey("selectWorld.world");
-		this.localizedConvertText = t.translateKey("selectWorld.conversion");
-		this.localizedGamemodeText[EnumGameType.SURVIVAL.getID()] = t.translateKey("gameMode.survival");
-		this.localizedGamemodeText[EnumGameType.CREATIVE.getID()] = t.translateKey("gameMode.creative");
-		this.localizedGamemodeText[EnumGameType.ADVENTURE.getID()] = t.translateKey("gameMode.adventure");
+		this.localizedWorldText = I18n.func_135053_a("selectWorld.world");
+		this.localizedConvertText = I18n.func_135053_a("selectWorld.conversion");
+		this.localizedGamemodeText[EnumGameType.SURVIVAL.getID()] = I18n.func_135053_a("gameMode.survival");
+		this.localizedGamemodeText[EnumGameType.CREATIVE.getID()] = I18n.func_135053_a("gameMode.creative");
+		this.localizedGamemodeText[EnumGameType.ADVENTURE.getID()] = I18n.func_135053_a("gameMode.adventure");
 		this.worldSlotContainer = new GuiNovamenuWorldSlot(this);
 		this.worldSlotContainer.registerScrollButtons(this.buttonList, 4, 5);
 		this.initButtons();
@@ -88,21 +88,19 @@ public class GuiNovamenuSelectWorld extends GuiNovamenuScreen {
 	protected String getSaveName(int par1) {
 		String s = ((SaveFormatComparator)this.saveList.get(par1)).getDisplayName();
 		if(s == null || MathHelper.stringNullOrLengthZero(s)) {
-			StringTranslate t = StringTranslate.getInstance();
-			s = t.translateKey("selectWorld.world")+" "+(par1 + 1);
+			s = I18n.func_135053_a("selectWorld.world")+" "+(par1 + 1);
 		}
 		return s;
 	}
 	
 	public void initButtons() {
 		this.buttons.clear();
-		StringTranslate t = StringTranslate.getInstance();
-		this.buttons.add(this.buttonSelect = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 60, 150, 16, 1, t.translateKey("selectWorld.select")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4, this.height - 60, 150, 16, 3, t.translateKey("selectWorld.create")));
-		this.buttons.add(this.buttonRename = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 36, 72, 16, 6, t.translateKey("selectWorld.rename")));
-		this.buttons.add(this.buttonDelete = new GuiButtonTransparent(this, this.width / 2 - 76, this.height - 36, 72, 16, 2, t.translateKey("selectWorld.delete")));
-		this.buttons.add(this.buttonRecreate = new GuiButtonTransparent(this, this.width / 2, this.height - 36, 80, 16, 7, t.translateKey("selectWorld.recreate")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 82, this.height - 36, 72, 16, 0, t.translateKey("gui.cancel")));
+		this.buttons.add(this.buttonSelect = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 60, 150, 16, 1, I18n.func_135053_a("selectWorld.select")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4, this.height - 60, 150, 16, 3, I18n.func_135053_a("selectWorld.create")));
+		this.buttons.add(this.buttonRename = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 36, 72, 16, 6, I18n.func_135053_a("selectWorld.rename")));
+		this.buttons.add(this.buttonDelete = new GuiButtonTransparent(this, this.width / 2 - 76, this.height - 36, 72, 16, 2, I18n.func_135053_a("selectWorld.delete")));
+		this.buttons.add(this.buttonRecreate = new GuiButtonTransparent(this, this.width / 2, this.height - 36, 80, 16, 7, I18n.func_135053_a("selectWorld.recreate")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 82, this.height - 36, 72, 16, 0, I18n.func_135053_a("gui.cancel")));
 		this.buttonSelect.enabled = false;
 		this.buttonDelete.enabled = false;
 		this.buttonRename.enabled = false;
@@ -158,11 +156,10 @@ public class GuiNovamenuSelectWorld extends GuiNovamenuScreen {
 	}
 	
 	public static GuiNovamenuYesNo getDeleteWorldScreen(GuiNovamenuScreen par0GuiScreen, String par1Str, int par2) {
-		StringTranslate t = StringTranslate.getInstance();
-		String s1 = t.translateKey("selectWorld.deleteQuestion");
-		String s2 = "\'" + par1Str + "\' " + t.translateKey("selectWorld.deleteWarning");
-		String s3 = t.translateKey("selectWorld.deleteButton");
-		String s4 = t.translateKey("gui.cancel");
+		String s1 = I18n.func_135053_a("selectWorld.deleteQuestion");
+		String s2 = "\'" + par1Str + "\' " + I18n.func_135053_a("selectWorld.deleteWarning");
+		String s3 = I18n.func_135053_a("selectWorld.deleteButton");
+		String s4 = I18n.func_135053_a("gui.cancel");
 		GuiNovamenuYesNo confirmDelete = new GuiNovamenuYesNo(par0GuiScreen, s1, s2, s3, s4, par2);
 		return confirmDelete;
 	}

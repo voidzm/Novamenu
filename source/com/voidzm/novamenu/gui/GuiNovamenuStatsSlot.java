@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.stats.StatCrafting;
 import net.minecraft.util.StringTranslate;
@@ -142,7 +143,7 @@ public abstract class GuiNovamenuStatsSlot extends GuiNovamenuSlot {
 					}
 					s = this.func_77258_c(2);
 				}
-				s = ("" + StringTranslate.getInstance().translateKey(s)).trim();
+				s = ("" + I18n.func_135053_a(s)).trim();
 				if(s.length() > 0) {
 					int i1 = par1 + 12;
 					int j1 = par2 - 12;
@@ -157,7 +158,7 @@ public abstract class GuiNovamenuStatsSlot extends GuiNovamenuSlot {
 	protected void func_77259_a(StatCrafting par1StatCrafting, int par2, int par3) {
 		if(par1StatCrafting != null) {
 			Item item = Item.itemsList[par1StatCrafting.getItemID()];
-			String s = ("" + StringTranslate.getInstance().translateNamedKey(item.getUnlocalizedName())).trim();
+			String s = ("" + I18n.func_135053_a(item.getUnlocalizedName() + ".name")).trim();
 			if(s.length() > 0) {
 				int k = par2 + 12;
 				int l = par3 - 12;

@@ -14,20 +14,27 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 import cpw.mods.fml.common.asm.transformers.AccessTransformer;
-import cpw.mods.fml.relauncher.FMLRelauncher;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 
 public class NovamenuTransformer extends AccessTransformer {
 	
+	protected static boolean doVerboseTransformer;
+	
+	private boolean minecraftTransformed = false;
+	
 	public NovamenuTransformer() throws IOException {
 		super();
+		System.out.println("[Novamenu] ASM transformer initializing.");
+		doVerboseTransformer = Boolean.parseBoolean(System.getProperty("novamenu.doVerboseTransformer", "false"));
+		if(doVerboseTransformer) {
+			System.out.println("[Novamenu] Verbose ASM transformer enabled as a JVM parameter.");
+		}
 	}
 
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] bytes) {
 		try {
-			if(FMLRelauncher.side().equals("CLIENT")) {
-				bytes = this.transformMinecraft(name, bytes);
-			}
+			bytes = this.transformMinecraft(name, bytes);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -35,8 +42,15 @@ public class NovamenuTransformer extends AccessTransformer {
 	}
 	
 	private byte[] transformMinecraft(String name, byte[] bytes) {
+		if(this.minecraftTransformed == true) return bytes;
 		String className = NovamenuPlugin.isDevEnvironment ? "net.minecraft.client.Minecraft" : ReobfuscationMappingHelper.getInstance().attemptRemapClassName("net.minecraft.client.Minecraft");
+		if(doVerboseTransformer) {
+			System.out.println("Locating Minecraft.class; comparing " + name + " to target " + className + ".");
+		}
 		if(name.equals(className)) {
+			if(doVerboseTransformer) {
+				System.out.println("Minecraft.class located under " + name);
+			}
 			ClassReader cr = new ClassReader(bytes);
 			ClassWriter cw = new ClassWriter(0);
 			String methodName = NovamenuPlugin.isDevEnvironment ? "displayGuiScreen" : ReobfuscationMappingHelper.getInstance().attemptRemapMethodName("net.minecraft.client.Minecraft/displayGuiScreen");
@@ -44,6 +58,7 @@ public class NovamenuTransformer extends AccessTransformer {
 			ClassMethodVisitor cv = new ClassMethodVisitor(cw, methodName, methodDesc, DisplayGuiScreenMethodVisitor.class);
 			cr.accept(cv, 0);
 			bytes = cw.toByteArray();
+			this.minecraftTransformed = true;
 		}
 		return bytes;
 	}

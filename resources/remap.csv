@@ -1,4 +1,5 @@
-1.5.2
-class,net.minecraft.client.gui.GuiScreen,axr
+1.6.2
+class,net.minecraft.client.Minecraft,ats
+class,net.minecraft.client.gui.GuiScreen,awb
 method,net.minecraft.client.Minecraft/displayGuiScreen,a
 field,net.minecraft.client.settings.GameSettings/showDebugInfo,ab
