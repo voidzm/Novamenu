@@ -3,3 +3,6 @@ class,net.minecraft.client.Minecraft,ats
 class,net.minecraft.client.gui.GuiScreen,awb
 method,net.minecraft.client.Minecraft/displayGuiScreen,a
 field,net.minecraft.client.settings.GameSettings/showDebugInfo,ab
+field,net.minecraft.client.gui.GuiDisconnected/errorMessage,a
+field,net.minecraft.client.gui.GuiDisconnected/errorDetail,b
+field,net.minecraft.client.gui.GuiDisconnected/field_74247_c,c

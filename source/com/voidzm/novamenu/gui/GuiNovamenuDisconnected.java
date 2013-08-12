@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
 
+import com.voidzm.novamenu.asm.NovamenuPlugin;
+import com.voidzm.novamenu.asm.ReobfuscationMappingHelper;
+
 import cpw.mods.fml.client.GuiDupesFound;
 
 import net.minecraft.client.gui.GuiDisconnected;
@@ -36,13 +39,16 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 		String oldDetail = "";
 		Object[] oldMessageArray = null;
 		try {
-			Field m = GuiDisconnected.class.getDeclaredField("errorMessage");
+			String errorMessageName = NovamenuPlugin.isDevEnvironment ? "errorMessage" : ReobfuscationMappingHelper.getInstance().attemptRemapFieldName("net.minecraft.client.gui.GuiDisconnected/errorMessage");
+			String errorDetailName = NovamenuPlugin.isDevEnvironment ? "errorDetail" : ReobfuscationMappingHelper.getInstance().attemptRemapFieldName("net.minecraft.client.gui.GuiDisconnected/errorDetail");
+			String objArrayName = NovamenuPlugin.isDevEnvironment ? "field_74247_c" : ReobfuscationMappingHelper.getInstance().attemptRemapFieldName("net.minecraft.client.gui.GuiDisconnected/field_74247_c");
+			Field m = GuiDisconnected.class.getDeclaredField(errorMessageName);
 			m.setAccessible(true);
 			oldMessage = (String)m.get(par1Disconnected);
-			Field d = GuiDisconnected.class.getDeclaredField("errorDetail");
+			Field d = GuiDisconnected.class.getDeclaredField(errorDetailName);
 			d.setAccessible(true);
 			oldDetail = (String)d.get(par1Disconnected);
-			Field o = GuiDisconnected.class.getDeclaredField("field_74247_c");
+			Field o = GuiDisconnected.class.getDeclaredField(objArrayName);
 			o.setAccessible(true);
 			oldMessageArray = (Object[])o.get(par1Disconnected);
 		}

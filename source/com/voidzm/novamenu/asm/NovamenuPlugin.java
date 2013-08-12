@@ -19,7 +19,7 @@ public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 	public static File location;
 	public static boolean isDevEnvironment = true;
 	public static String minecraftVersion = "1.6.2";
-	public static String novamenuVersion = "1.1.0";
+	public static String novamenuVersion = "1.1.1";
 	
 	private static NovamenuPlugin instance;
 	

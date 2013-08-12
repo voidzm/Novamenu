@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -301,6 +302,9 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 			String[] astring;
 			if(s.startsWith("\u00a7") && s.length() > 1) {
 				astring = s.substring(1).split("\u0000");
+				
+				System.out.println("Server: " + par1ServerData.serverIP + ", " + Arrays.toString(astring));
+				
 				if(MathHelper.parseIntWithDefault(astring[0], 0) == 1) {
 					par1ServerData.serverMOTD = astring[3];
 					par1ServerData.field_82821_f = MathHelper.parseIntWithDefault(astring[1], par1ServerData.field_82821_f);
