@@ -37,7 +37,7 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 		if(NovamenuTransformer.doVerboseTransformer) {
 			System.out.println("Transforming Minecraft.displayGuiScreen method head.");
 		}
-		
+
 		mv.visitVarInsn(ALOAD, 1);
 		mv.visitTypeInsn(INSTANCEOF, "net/minecraft/client/gui/GuiIngameMenu");
 		Label j1 = new Label();
@@ -47,7 +47,7 @@ public class DisplayGuiScreenMethodVisitor extends MethodVisitor {
 		mv.visitMethodInsn(INVOKESPECIAL, "com/voidzm/novamenu/gui/GuiNovamenuIngameMenu", "<init>", "()V");
 		mv.visitVarInsn(ASTORE, 1);
 		mv.visitLabel(j1);
-		
+
 		mv.visitVarInsn(ALOAD, 1);
 		mv.visitTypeInsn(INSTANCEOF, "net/minecraft/client/gui/GuiDisconnected");
 		Label j2 = new Label();

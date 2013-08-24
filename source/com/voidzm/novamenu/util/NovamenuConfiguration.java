@@ -15,6 +15,7 @@ public class NovamenuConfiguration {
 	
 	public boolean useCustomCreateWorldMenu;
 	public boolean useCustomOptionsMenu;
+	public boolean useCustomIngameMenu;
 	
 	//**  SECONDARY LEVEL  **//
 	
@@ -33,6 +34,7 @@ public class NovamenuConfiguration {
 	private void loadTopLevelConfig() {
 		useCustomCreateWorldMenu = internalCfg.get(CATEGORY_TOP, "useCustomCreateWorldMenu", "true").getBoolean(true);
 		useCustomOptionsMenu = internalCfg.get(CATEGORY_TOP, "useCustomOptionsMenu", "true").getBoolean(true);
+		useCustomIngameMenu = internalCfg.get(CATEGORY_TOP, "useCustomIngameMenu", "true").getBoolean(true);
 	}
 	
 	private void loadSecondaryLevelConfig() {

@@ -72,6 +72,7 @@ public class GuiModDetail extends GuiNovamenuScreen {
 					}
 				}
 				if(logo != null) {
+					GL11.glEnable(GL11.GL_BLEND);
 					ResourceLocation rl = tm.func_110578_a("modlogo", new DynamicTexture(logo));
 					this.mc.renderEngine.func_110577_a(rl);
 					Dimension dim = new Dimension(logo.getWidth(), logo.getHeight());
@@ -91,6 +92,7 @@ public class GuiModDetail extends GuiNovamenuScreen {
 					t.addVertexWithUV((this.width / 2) - 100.0 + dim.width, top, zLevel, 1, 0);
 					t.addVertexWithUV((this.width / 2) - 100.0, top, zLevel, 0, 0);
 					t.draw();
+					GL11.glDisable(GL11.GL_BLEND);
 				}
 			}
 			catch(IOException e) {
