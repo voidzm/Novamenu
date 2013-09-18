@@ -35,8 +35,8 @@ public class GuiNovamenuRenameWorld extends GuiNovamenuScreen {
 	public void initGui() {
 		Keyboard.enableRepeatEvents(true);
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 96 + 12, 200, 16, 0, I18n.func_135053_a("selectWorld.renameButton")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 1, I18n.func_135053_a("gui.cancel")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 96 + 12, 200, 16, 0, I18n.getString("selectWorld.renameButton")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 1, I18n.getString("gui.cancel")));
 		ISaveFormat isaveformat = this.mc.getSaveLoader();
 		WorldInfo worldinfo = isaveformat.getWorldInfo(this.worldName);
 		String s = worldinfo.getWorldName();
@@ -85,8 +85,8 @@ public class GuiNovamenuRenameWorld extends GuiNovamenuScreen {
 	public void drawScreenForeground(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
-		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("selectWorld.renameTitle"), this.width / 2, 40, 16777215);
-		this.drawString(this.fontRenderer, I18n.func_135053_a("selectWorld.enterName"), this.width / 2 - 100, 67, 10526880);
+		this.drawCenteredString(this.fontRenderer, I18n.getString("selectWorld.renameTitle"), this.width / 2, 40, 16777215);
+		this.drawString(this.fontRenderer, I18n.getString("selectWorld.enterName"), this.width / 2 - 100, 67, 10526880);
 		this.textWorldName.drawTextBox();
 	}
 

@@ -16,7 +16,7 @@ import com.voidzm.novamenu.thread.ThreadNovamenuPollServers;
 public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 
 	private final GuiNovamenuMultiplayer parent;
-	
+
 	public GuiNovamenuServerSlot(GuiNovamenuMultiplayer screen) {
 		super(screen.getMinecraft(), screen.width, screen.height, 32, screen.height - 64, 36);
 		this.parent = screen;
@@ -41,7 +41,7 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 			if(par2 && flag1) {
 				GuiNovamenuMultiplayer.func_74008_b(this.parent, par1);
 			}
-			else if (flag2 && GuiScreen.isShiftKeyDown() && j >= 0 && j < GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers()) {
+			else if(flag2 && GuiScreen.isShiftKeyDown() && j >= 0 && j < GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers()) {
 				GuiNovamenuMultiplayer.getInternetServerList(this.parent).swapServers(j, GuiNovamenuMultiplayer.getSelectedServer(this.parent));
 			}
 		}
@@ -62,7 +62,7 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 		if(par1 < GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers()) {
 			this.func_77247_d(par1, par2, par3, par4, par5Tessellator);
 		}
-		else if (par1 < GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers() + GuiNovamenuMultiplayer.getListOfLanServers(this.parent).size()) {
+		else if(par1 < GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers() + GuiNovamenuMultiplayer.getListOfLanServers(this.parent).size()) {
 			this.func_77248_b(par1, par2, par3, par4, par5Tessellator);
 		}
 		else {
@@ -86,16 +86,16 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 		this.parent.drawCenteredString(this.parent.getFontRenderer(), StatCollector.translateToLocal("lanServer.scanning"), this.parent.width / 2, par3 + 1, 16777215);
 		String s;
 		switch(GuiNovamenuMultiplayer.getTicksOpened(this.parent) / 3 % 4) {
-		case 0:
-		default:
-			s = "O o o";
-			break;
-		case 1:
-		case 3:
-			s = "o O o";
-			break;
-		case 2:
-			s = "o o O";
+			case 0:
+			default:
+				s = "O o o";
+				break;
+			case 1:
+			case 3:
+				s = "o O o";
+				break;
+			case 2:
+				s = "o o O";
 		}
 		this.parent.drawCenteredString(this.parent.getFontRenderer(), s, this.parent.width / 2, par3 + 12, 8421504);
 	}
@@ -129,7 +129,7 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 			this.parent.drawString(this.parent.getFontRenderer(), StatCollector.translateToLocal("selectServer.hiddenAddress"), par2 + 2, par3 + 12 + 11, 5263440);
 		}
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.parent.getMinecraft().renderEngine.func_110577_a(Gui.field_110324_m);
+		this.parent.getMinecraft().renderEngine.bindTexture(Gui.icons);
 		byte b0 = 0;
 		String s1 = "";
 		int i1;
@@ -165,7 +165,7 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 		}
 		else {
 			b0 = 1;
-			i1 = (int)(Minecraft.getSystemTime() / 100L + (long)(par1 * 2) & 7L);
+			i1 = (int)(Minecraft.getSystemTime() / 100L + par1 * 2 & 7L);
 			if(i1 > 4) {
 				i1 = 8 - i1;
 			}

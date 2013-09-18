@@ -1,6 +1,5 @@
 package com.voidzm.novamenu.gui;
 
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -8,7 +7,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -16,9 +14,9 @@ import org.lwjgl.opengl.GL12;
 public class GuiNovamenuStats extends GuiNovamenuScreen {
 
 	private static RenderItem renderItem = new RenderItem();
-	
+
 	private GuiNovamenuScreen parent;
-	
+
 	private String screenTitle = "Statistics";
 
 	private GuiNovamenuStatsGeneralSlot generalSlot;
@@ -34,6 +32,7 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 		this.statFileWriter = par2StatFileWriter;
 	}
 
+	@Override
 	public void initGui() {
 		this.screenTitle = StatCollector.translateToLocal("gui.stats");
 		this.generalSlot = new GuiNovamenuStatsGeneralSlot(this);
@@ -48,12 +47,12 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 
 	public void addHeaderButtons() {
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 71, this.height - 28, 150, 16, 0, I18n.func_135053_a("gui.done")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 52, 100, 16, 1, I18n.func_135053_a("stat.generalButton")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 71, this.height - 28, 150, 16, 0, I18n.getString("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 52, 100, 16, 1, I18n.getString("stat.generalButton")));
 		GuiButtonTransparent guibutton;
-		this.buttons.add(guibutton = new GuiButtonTransparent(this, this.width / 2 - 46, this.height - 52, 100, 16, 2, I18n.func_135053_a("stat.blocksButton")));
+		this.buttons.add(guibutton = new GuiButtonTransparent(this, this.width / 2 - 46, this.height - 52, 100, 16, 2, I18n.getString("stat.blocksButton")));
 		GuiButtonTransparent guibutton1;
-		this.buttons.add(guibutton1 = new GuiButtonTransparent(this, this.width / 2 + 62, this.height - 52, 100, 16, 3, I18n.func_135053_a("stat.itemsButton")));
+		this.buttons.add(guibutton1 = new GuiButtonTransparent(this, this.width / 2 + 62, this.height - 52, 100, 16, 3, I18n.getString("stat.itemsButton")));
 		if(this.blockSlot.getSize() == 0) {
 			guibutton.enabled = false;
 		}
@@ -87,15 +86,15 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, 40, 0xBB000000);
 		this.drawRect(0, 40, width, 41, 0xDD000000);
-		this.drawRect(0, 41, width, height-73, 0x88000000);
-		this.drawRect(0, height-73, width, height-72, 0xDD000000);
-		this.drawRect(0, height-72, width, height, 0xBB000000);
+		this.drawRect(0, 41, width, height - 73, 0x88000000);
+		this.drawRect(0, height - 73, width, height - 72, 0xDD000000);
+		this.drawRect(0, height - 72, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
 		this.selectedSlot.drawScreen(par1, par2, par3);
 		this.drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 18, 16777215);
 	}
 
-	private void drawItemSprite(int par1, int par2, int par3){
+	private void drawItemSprite(int par1, int par2, int par3) {
 		this.drawButtonBackground(par1 + 1, par2 + 1);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		RenderHelper.enableGUIStandardItemLighting();
@@ -110,13 +109,13 @@ public class GuiNovamenuStats extends GuiNovamenuScreen {
 
 	private void drawSprite(int par1, int par2, int par3, int par4) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.renderEngine.func_110577_a(Gui.field_110323_l);
+		this.mc.renderEngine.bindTexture(statIcons);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 18), (double)this.zLevel, (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 18), (double)(par2 + 18), (double)this.zLevel, (double)((float)(par3 + 18) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 18), (double)(par2 + 0), (double)this.zLevel, (double)((float)(par3 + 18) * 0.0078125F), (double)((float)(par4 + 0) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)this.zLevel, (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 0) * 0.0078125F));
+		tessellator.addVertexWithUV(par1 + 0, par2 + 18, this.zLevel, (par3 + 0) * 0.0078125F, (par4 + 18) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 18, par2 + 18, this.zLevel, (par3 + 18) * 0.0078125F, (par4 + 18) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 18, par2 + 0, this.zLevel, (par3 + 18) * 0.0078125F, (par4 + 0) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 0, par2 + 0, this.zLevel, (par3 + 0) * 0.0078125F, (par4 + 0) * 0.0078125F);
 		tessellator.draw();
 	}
 

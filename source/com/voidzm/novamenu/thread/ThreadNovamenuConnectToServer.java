@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ThreadNovamenuConnectToServer extends Thread {
-	
+
 	public final String ip;
 	public final int port;
 
@@ -26,13 +26,14 @@ public class ThreadNovamenuConnectToServer extends Thread {
 		this.port = par3;
 	}
 
+	@Override
 	public void run() {
 		try {
 			GuiNovamenuConnecting.setNetClientHandler(this.connectingGui, new NetClientHandler(GuiNovamenuConnecting.func_74256_a(this.connectingGui), this.ip, this.port));
 			if(GuiNovamenuConnecting.isCancelled(this.connectingGui)) return;
-			GuiNovamenuConnecting.getNetClientHandler(this.connectingGui).addToSendQueue(new Packet2ClientProtocol(74, GuiNovamenuConnecting.func_74254_c(this.connectingGui).func_110432_I().func_111285_a(), this.ip, this.port));
+			GuiNovamenuConnecting.getNetClientHandler(this.connectingGui).addToSendQueue(new Packet2ClientProtocol(74, GuiNovamenuConnecting.func_74254_c(this.connectingGui).getSession().getUsername(), this.ip, this.port));
 		}
-		catch(UnknownHostException unknownhostexception){
+		catch(UnknownHostException unknownhostexception) {
 			if(GuiNovamenuConnecting.isCancelled(this.connectingGui)) return;
 			GuiNovamenuConnecting.func_74250_f(this.connectingGui).displayGuiScreen(new GuiNovamenuDisconnected(GuiNovamenuConnecting.func_98097_e(this.connectingGui), "connect.failed", "disconnect.genericReason", GuiNovamenuConnecting.getTick(this.connectingGui), new Object[] {"Unknown host \'" + this.ip + "\'"}));
 		}
@@ -47,4 +48,3 @@ public class ThreadNovamenuConnectToServer extends Thread {
 		}
 	}
 }
-

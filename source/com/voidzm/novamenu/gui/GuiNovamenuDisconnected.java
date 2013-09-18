@@ -4,15 +4,12 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.List;
 
-import com.voidzm.novamenu.asm.NovamenuPlugin;
-import com.voidzm.novamenu.asm.ReobfuscationMappingHelper;
-
-import cpw.mods.fml.client.GuiDupesFound;
-
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.util.StringTranslate;
+
+import com.voidzm.novamenu.asm.NovamenuPlugin;
+import com.voidzm.novamenu.asm.ReobfuscationMappingHelper;
 
 public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 
@@ -22,9 +19,9 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 	private List messageList;
 	private final GuiNovamenuScreen parent;
 
-	public GuiNovamenuDisconnected(GuiNovamenuScreen par1GuiScreen, String par2Str, String par3Str, int tick, Object ... par4ArrayOfObj) {
+	public GuiNovamenuDisconnected(GuiNovamenuScreen par1GuiScreen, String par2Str, String par3Str, int tick, Object... par4ArrayOfObj) {
 		this.parent = par1GuiScreen;
-		this.errorMessage = I18n.func_135053_a(par2Str);
+		this.errorMessage = I18n.getString(par2Str);
 		this.errorDetail = par3Str;
 		this.messageArray = par4ArrayOfObj;
 		this.imageTick = tick;
@@ -59,29 +56,30 @@ public class GuiNovamenuDisconnected extends GuiNovamenuScreen {
 		this.errorDetail = oldDetail;
 		this.messageArray = oldMessageArray;
 	}
-	
+
 	@Override
-	protected void keyTyped(char par1, int par2) {}
+	protected void keyTyped(char par1, int par2) {
+	}
 
 	@Override
 	public void initGui() {
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, I18n.func_135053_a("gui.toMenu")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, I18n.getString("gui.toMenu")));
 		if(this.messageArray != null) {
-			this.messageList = this.fontRenderer.listFormattedStringToWidth(I18n.func_135052_a(this.errorDetail, this.messageArray), this.width - 50);
+			this.messageList = this.fontRenderer.listFormattedStringToWidth(I18n.getStringParams(this.errorDetail, this.messageArray), this.width - 50);
 		}
 		else {
-			this.messageList = this.fontRenderer.listFormattedStringToWidth(I18n.func_135053_a(this.errorDetail), this.width - 50);
+			this.messageList = this.fontRenderer.listFormattedStringToWidth(I18n.getString(this.errorDetail), this.width - 50);
 		}
 	}
-	
+
 	@Override
 	public void buttonEvent(int id) {
 		switch(id) {
-		case 0:
-			this.parent.imageTick = this.imageTick;
-			this.mc.displayGuiScreen(this.parent);
-			break;
+			case 0:
+				this.parent.imageTick = this.imageTick;
+				this.mc.displayGuiScreen(this.parent);
+				break;
 		}
 	}
 

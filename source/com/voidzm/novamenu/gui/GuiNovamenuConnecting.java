@@ -50,7 +50,7 @@ public class GuiNovamenuConnecting extends GuiNovamenuScreen {
 	@Override
 	public void initGui() {
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, I18n.func_135053_a("gui.cancel")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 4 + 120 + 12, 200, 16, 0, I18n.getString("gui.cancel")));
 	}
 
 	@Override
@@ -71,11 +71,11 @@ public class GuiNovamenuConnecting extends GuiNovamenuScreen {
 		this.drawRect(0, 0, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
 		if(this.netHandler == null) {
-			this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("connect.connecting"), this.width / 2, this.height / 2 - 50, 16777215);
+			this.drawCenteredString(this.fontRenderer, I18n.getString("connect.connecting"), this.width / 2, this.height / 2 - 50, 16777215);
 			this.drawCenteredString(this.fontRenderer, "", this.width / 2, this.height / 2 - 10, 16777215);
 		}
 		else {
-			this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);
+			this.drawCenteredString(this.fontRenderer, I18n.getString("connect.authorizing"), this.width / 2, this.height / 2 - 50, 16777215);
 			this.drawCenteredString(this.fontRenderer, this.netHandler.field_72560_a, this.width / 2, this.height / 2 - 10, 16777215);
 		}
 	}

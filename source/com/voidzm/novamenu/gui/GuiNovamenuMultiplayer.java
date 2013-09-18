@@ -85,13 +85,13 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 	}
 
 	public void initGuiControls() {
-		this.buttons.add(this.buttonEdit = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 28, 70, 16, 7, I18n.func_135053_a("selectServer.edit")));
-		this.buttons.add(this.buttonDelete = new GuiButtonTransparent(this, this.width / 2 - 74, this.height - 28, 70, 16, 2, I18n.func_135053_a("selectServer.delete")));
-		this.buttons.add(this.buttonSelect = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 52, 100, 16, 1, I18n.func_135053_a("selectServer.select")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 50, this.height - 52, 100, 16, 4, I18n.func_135053_a("selectServer.direct")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4 + 50, this.height - 52, 100, 16, 3, I18n.func_135053_a("selectServer.add")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4, this.height - 28, 70, 16, 8, I18n.func_135053_a("selectServer.refresh")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4 + 76, this.height - 28, 75, 16, 0, I18n.func_135053_a("gui.cancel")));
+		this.buttons.add(this.buttonEdit = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 28, 70, 16, 7, I18n.getString("selectServer.edit")));
+		this.buttons.add(this.buttonDelete = new GuiButtonTransparent(this, this.width / 2 - 74, this.height - 28, 70, 16, 2, I18n.getString("selectServer.delete")));
+		this.buttons.add(this.buttonSelect = new GuiButtonTransparent(this, this.width / 2 - 154, this.height - 52, 100, 16, 1, I18n.getString("selectServer.select")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 50, this.height - 52, 100, 16, 4, I18n.getString("selectServer.direct")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4 + 50, this.height - 52, 100, 16, 3, I18n.getString("selectServer.add")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4, this.height - 28, 70, 16, 8, I18n.getString("selectServer.refresh")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 4 + 76, this.height - 28, 75, 16, 0, I18n.getString("gui.cancel")));
 		boolean flag = this.selectedServer >= 0 && this.selectedServer < this.slotServer.getSize();
 		this.buttonSelect.enabled = flag;
 		this.buttonEdit.enabled = flag;
@@ -131,10 +131,10 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 			String s = this.internetServerList.getServerData(this.selectedServer).serverName;
 			if(s != null) {
 				this.deleteClicked = true;
-				String s1 = I18n.func_135053_a("selectServer.deleteQuestion");
-				String s2 = "\'" + s + "\' " + I18n.func_135053_a("selectServer.deleteWarning");
-				String s3 = I18n.func_135053_a("selectServer.deleteButton");
-				String s4 = I18n.func_135053_a("gui.cancel");
+				String s1 = I18n.getString("selectServer.deleteQuestion");
+				String s2 = "\'" + s + "\' " + I18n.getString("selectServer.deleteWarning");
+				String s3 = I18n.getString("selectServer.deleteButton");
+				String s4 = I18n.getString("gui.cancel");
 				GuiNovamenuYesNo guiyesno = new GuiNovamenuYesNo(this, s1, s2, s3, s4, this.selectedServer);
 				this.mc.displayGuiScreen(guiyesno);
 			}
@@ -248,7 +248,7 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 		super.drawScreenForeground(par1, par2, par3);
 		this.lagTooltip = null;
 		this.slotServer.drawScreen(par1, par2, par3);
-		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("multiplayer.title"), this.width / 2, 20, 16777215);
+		this.drawCenteredString(this.fontRenderer, I18n.getString("multiplayer.title"), this.width / 2, 20, 16777215);
 		if(this.lagTooltip != null) {
 			this.func_74007_a(this.lagTooltip, par1, par2);
 		}

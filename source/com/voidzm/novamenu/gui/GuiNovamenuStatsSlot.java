@@ -143,7 +143,7 @@ public abstract class GuiNovamenuStatsSlot extends GuiNovamenuSlot {
 					}
 					s = this.func_77258_c(2);
 				}
-				s = ("" + I18n.func_135053_a(s)).trim();
+				s = ("" + I18n.getString(s)).trim();
 				if(s.length() > 0) {
 					int i1 = par1 + 12;
 					int j1 = par2 - 12;
@@ -158,7 +158,7 @@ public abstract class GuiNovamenuStatsSlot extends GuiNovamenuSlot {
 	protected void func_77259_a(StatCrafting par1StatCrafting, int par2, int par3) {
 		if(par1StatCrafting != null) {
 			Item item = Item.itemsList[par1StatCrafting.getItemID()];
-			String s = ("" + I18n.func_135053_a(item.getUnlocalizedName() + ".name")).trim();
+			String s = ("" + I18n.getString(item.getUnlocalizedName() + ".name")).trim();
 			if(s.length() > 0) {
 				int k = par2 + 12;
 				int l = par3 - 12;

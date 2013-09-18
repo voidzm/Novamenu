@@ -1,27 +1,26 @@
 package com.voidzm.novamenu.gui;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import java.util.ArrayList;
 
-import com.voidzm.novamenu.asm.NovamenuPlugin;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.ModContainer;
 import net.minecraft.client.gui.GuiVideoSettings;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.EnumOptions;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
+
+import com.voidzm.novamenu.asm.NovamenuPlugin;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.ModContainer;
 
 public class GuiNovamenuOptions extends GuiNovamenuScreen {
-	
+
 	private GuiNovamenuScreen parent;
 	private GameSettings settings;
 	private String screenTitle = "Options";
-	
+
 	public boolean isIngame = false;
-	
+
 	public GuiNovamenuOptions(GuiNovamenuScreen par1GuiScreen, GameSettings par2GameSettings) {
 		this.parent = par1GuiScreen;
 		this.imageTick = par1GuiScreen.imageTick;
@@ -31,6 +30,7 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 		this.settings = par2GameSettings;
 	}
 
+	@Override
 	public void initGui() {
 		this.buttons.clear();
 		this.buttons.add(new GuiSliderTransparent(this, 0, this.width / 2 - 155, this.height / 6 - 12, EnumOptions.MUSIC, this.settings.getKeyBinding(EnumOptions.MUSIC), this.settings.getOptionFloatValue(EnumOptions.MUSIC)));
@@ -45,15 +45,16 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 		}
 		this.buttons.add(difficultyButton);
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height / 6 + 60, 150, 16, 6, this.settings.getKeyBinding(EnumOptions.TOUCHSCREEN)));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 90, 150, 16, 7, I18n.func_135053_a("options.video")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 90, 150, 16, 8, I18n.func_135053_a("options.controls")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 114, 150, 16, 9, I18n.func_135053_a("options.language")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 114, 150, 16, 10, I18n.func_135053_a("options.multiplayer.title")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 138, 150, 16, 11, I18n.func_135053_a("options.resourcepack")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 138, 150, 16, 12, I18n.func_135053_a("options.snooper.view")));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 13, I18n.func_135053_a("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 90, 150, 16, 7, I18n.getString("options.video")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 90, 150, 16, 8, I18n.getString("options.controls")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 114, 150, 16, 9, I18n.getString("options.language")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 114, 150, 16, 10, I18n.getString("options.multiplayer.title")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 152, this.height / 6 + 138, 150, 16, 11, I18n.getString("options.resourcepack")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 2, this.height / 6 + 138, 150, 16, 12, I18n.getString("options.snooper.view")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 13, I18n.getString("gui.done")));
 	}
 
+	@Override
 	public void buttonEvent(int id) {
 		switch(id) {
 			case 2:
@@ -85,7 +86,7 @@ public class GuiNovamenuOptions extends GuiNovamenuScreen {
 				break;
 			case 9:
 				this.mc.gameSettings.saveOptions();
-				this.mc.displayGuiScreen(new GuiNovamenuLanguage(this, this.settings, this.mc.func_135016_M()));
+				this.mc.displayGuiScreen(new GuiNovamenuLanguage(this, this.settings, this.mc.getLanguageManager()));
 				break;
 			case 10:
 				this.mc.gameSettings.saveOptions();

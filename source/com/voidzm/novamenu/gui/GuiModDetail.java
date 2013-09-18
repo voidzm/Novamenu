@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -13,33 +12,30 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.resources.ResourcePack;
-import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.TextureFXManager;
 import cpw.mods.fml.common.ModContainer;
 
 public class GuiModDetail extends GuiNovamenuScreen {
 
 	private GuiNovamenuModList parent;
 	private ModContainer mod;
-	
+
 	public GuiModDetail(GuiNovamenuModList screen, ModContainer detailedMod) {
 		this.parent = screen;
 		this.imageTick = screen.imageTick;
 		this.mod = detailedMod;
 	}
-	
+
 	@Override
 	public void initGui() {
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height - 33, 200, 16, 0, I18n.func_135053_a("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height - 33, 200, 16, 0, I18n.getString("gui.done")));
 	}
-	
+
 	@Override
 	public void buttonEvent(int id) {
 		switch(id) {
@@ -50,7 +46,7 @@ public class GuiModDetail extends GuiNovamenuScreen {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void drawScreenForeground(int mx, int my, float tick) {
 		this.drawRect(0, 0, width, height, 0xBB000000);
@@ -58,12 +54,12 @@ public class GuiModDetail extends GuiNovamenuScreen {
 		String logoFile = this.mod.getMetadata().logoFile;
 		if(!logoFile.isEmpty()) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			TextureManager tm = mc.func_110434_K();
+			TextureManager tm = mc.getTextureManager();
 			ResourcePack pack = FMLClientHandler.instance().getResourcePackFor(mod.getModId());
 			try {
 				BufferedImage logo = null;
 				if(pack != null) {
-					logo = pack.func_110586_a();
+					logo = pack.getPackImage();
 				}
 				else {
 					InputStream logoResource = getClass().getResourceAsStream(logoFile);
@@ -73,8 +69,8 @@ public class GuiModDetail extends GuiNovamenuScreen {
 				}
 				if(logo != null) {
 					GL11.glEnable(GL11.GL_BLEND);
-					ResourceLocation rl = tm.func_110578_a("modlogo", new DynamicTexture(logo));
-					this.mc.renderEngine.func_110577_a(rl);
+					ResourceLocation rl = tm.getDynamicTextureLocation("modlogo", new DynamicTexture(logo));
+					this.mc.renderEngine.bindTexture(rl);
 					Dimension dim = new Dimension(logo.getWidth(), logo.getHeight());
 					double scaleX = dim.width / 200.0;
 					double scaleY = dim.height / 65.0;

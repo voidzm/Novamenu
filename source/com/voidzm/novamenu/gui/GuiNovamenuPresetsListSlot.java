@@ -39,17 +39,17 @@ public class GuiNovamenuPresetsListSlot extends GuiNovamenuSlot {
 
 	private void func_82455_b(int par1, int par2, int par3, int par4) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.parent.getMinecraft().func_110434_K().func_110577_a(Gui.field_110323_l);
+		this.parent.getMinecraft().getTextureManager().bindTexture(Gui.statIcons);
 		float f = 0.0078125F;
 		float f1 = 0.0078125F;
 		boolean flag = true;
 		boolean flag1 = true;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 18), (double)this.parent.getZLevel(), (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 18), (double)(par2 + 18), (double)this.parent.getZLevel(), (double)((float)(par3 + 18) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 18), (double)(par2 + 0), (double)this.parent.getZLevel(), (double)((float)(par3 + 18) * 0.0078125F), (double)((float)(par4 + 0) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)this.parent.getZLevel(), (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 0) * 0.0078125F));
+		tessellator.addVertexWithUV(par1 + 0, par2 + 18, this.parent.getZLevel(), (par3 + 0) * 0.0078125F, (par4 + 18) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 18, par2 + 18, this.parent.getZLevel(), (par3 + 18) * 0.0078125F, (par4 + 18) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 18, par2 + 0, this.parent.getZLevel(), (par3 + 18) * 0.0078125F, (par4 + 0) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 0, par2 + 0, this.parent.getZLevel(), (par3 + 0) * 0.0078125F, (par4 + 0) * 0.0078125F);
 		tessellator.draw();
 	}
 
@@ -71,7 +71,8 @@ public class GuiNovamenuPresetsListSlot extends GuiNovamenuSlot {
 	}
 
 	@Override
-	protected void drawBackground() {}
+	protected void drawBackground() {
+	}
 
 	@Override
 	protected void drawSlot(int par1, int par2, int par3, int par4, Tessellator par5Tessellator) {

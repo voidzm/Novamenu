@@ -5,7 +5,6 @@
 
 package com.voidzm.novamenu.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,9 +19,9 @@ import org.lwjgl.opengl.GL12;
 public class GuiNovamenuFlatWorldListSlot extends GuiNovamenuSlot {
 
 	public int field_82454_a;
-	
+
 	private final GuiNovamenuCreateFlatWorld parent;
-	
+
 	public GuiNovamenuFlatWorldListSlot(GuiNovamenuCreateFlatWorld parentScreen) {
 		super(parentScreen.getMinecraft(), parentScreen.width, parentScreen.height, 43, parentScreen.height - 60, 24);
 		this.parent = parentScreen;
@@ -40,26 +39,25 @@ public class GuiNovamenuFlatWorldListSlot extends GuiNovamenuSlot {
 		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 	}
 
-	private void func_82451_d(int par1, int par2){
+	private void func_82451_d(int par1, int par2) {
 		this.func_82450_b(par1, par2, 0, 0);
 	}
 
-	private void func_82450_b(int par1, int par2, int par3, int par4){
+	private void func_82450_b(int par1, int par2, int par3, int par4) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.parent.getMinecraft().func_110434_K().func_110577_a(Gui.field_110323_l);
+		this.parent.getMinecraft().getTextureManager().bindTexture(Gui.statIcons);
 		float f = 0.0078125F;
 		float f1 = 0.0078125F;
 		boolean flag = true;
 		boolean flag1 = true;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 18), (double)this.parent.getZLevel(), (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 18), (double)(par2 + 18), (double)this.parent.getZLevel(), (double)((float)(par3 + 18) * 0.0078125F), (double)((float)(par4 + 18) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 18), (double)(par2 + 0), (double)this.parent.getZLevel(), (double)((float)(par3 + 18) * 0.0078125F), (double)((float)(par4 + 0) * 0.0078125F));
-		tessellator.addVertexWithUV((double)(par1 + 0), (double)(par2 + 0), (double)this.parent.getZLevel(), (double)((float)(par3 + 0) * 0.0078125F), (double)((float)(par4 + 0) * 0.0078125F));
+		tessellator.addVertexWithUV(par1 + 0, par2 + 18, this.parent.getZLevel(), (par3 + 0) * 0.0078125F, (par4 + 18) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 18, par2 + 18, this.parent.getZLevel(), (par3 + 18) * 0.0078125F, (par4 + 18) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 18, par2 + 0, this.parent.getZLevel(), (par3 + 18) * 0.0078125F, (par4 + 0) * 0.0078125F);
+		tessellator.addVertexWithUV(par1 + 0, par2 + 0, this.parent.getZLevel(), (par3 + 0) * 0.0078125F, (par4 + 0) * 0.0078125F);
 		tessellator.draw();
 	}
-
 
 	@Override
 	protected int getSize() {

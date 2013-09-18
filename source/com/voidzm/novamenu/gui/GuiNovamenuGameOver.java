@@ -1,16 +1,11 @@
 package com.voidzm.novamenu.gui;
 
-import java.util.Iterator;
-
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiGameOver;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 
@@ -18,7 +13,7 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 		super();
 		System.out.println("Created.");
 	}
-	
+
 	@Override
 	public void initGui() {
 		this.buttons.clear();
@@ -33,14 +28,15 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 		else {
 			this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 205, this.height - 40, 200, 16, 1, StatCollector.translateToLocal("deathScreen.respawn")));
 			this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height - 40, 200, 16, 2, StatCollector.translateToLocal("deathScreen.titleScreen")));
-			if(this.mc.func_110432_I() == null) {
-				((GuiButtonTransparent)this.buttons.get(1)).enabled = false;
+			if(this.mc.getSession() == null) {
+				this.buttons.get(1).enabled = false;
 			}
 		}
 	}
-	
+
 	@Override
-	protected void keyTyped(char par1, int par2) {}
+	protected void keyTyped(char par1, int par2) {
+	}
 
 	@Override
 	public void buttonEvent(int id) {
@@ -61,9 +57,9 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, 64, 0xBB080000);
 		this.drawRect(0, 64, width, 65, 0xDD080000);
-		this.drawRect(0, 65, width, height-65, 0x66080000);
-		this.drawRect(0, height-65, width, height-64, 0xDD080000);
-		this.drawRect(0, height-64, width, height, 0xBB080000);
+		this.drawRect(0, 65, width, height - 65, 0x66080000);
+		this.drawRect(0, height - 65, width, height - 64, 0xDD080000);
+		this.drawRect(0, height - 64, width, height, 0xBB080000);
 		GL11.glPushMatrix();
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 		boolean flag = this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled();
@@ -83,11 +79,11 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 	public boolean doesGuiPauseGame() {
 		return false;
 	}
-	
+
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-		if(this.mc.thePlayer.func_110143_aJ() > 0.0F) {
+		if(this.mc.thePlayer.getHealth() > 0.0F) {
 			this.mc.displayGuiScreen((GuiScreen)null);
 		}
 	}

@@ -46,7 +46,7 @@ public class GuiNovamenuModList extends GuiNovamenuScreen {
 	@Override
 	public void initGui() {
 		this.buttons.clear();
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height - 33, 150, 16, 0, I18n.func_135053_a("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height - 33, 150, 16, 0, I18n.getString("gui.done")));
 		this.buttons.add(buttonSelect = new GuiButtonTransparent(this, this.width / 2 + 5, this.height - 33, 150, 16, 1, "Select Mod"));
 		this.buttonSelect.enabled = false;
 		this.modSlot = new GuiNovamenuModSlot(this, mods);

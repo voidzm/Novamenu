@@ -3,10 +3,10 @@ package com.voidzm.novamenu.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -18,7 +18,7 @@ public class GuiNovamenuControlsSlot extends GuiNovamenuSlot {
 	private String[] message;
 	private int mx, my;
 	private int selected = -1;
-	
+
 	public GuiNovamenuControlsSlot(GuiNovamenuControls controls, GameSettings gameSettings) {
 		super(Minecraft.getMinecraft(), controls.width, controls.height - 88, 40, controls.height - 48, 25);
 		this.parent = controls;
@@ -48,9 +48,10 @@ public class GuiNovamenuControlsSlot extends GuiNovamenuSlot {
 	protected boolean isSelected(int i) {
 		return false;
 	}
-	
+
 	@Override
-	protected void drawBackground() {}
+	protected void drawBackground() {
+	}
 
 	@Override
 	public void drawScreen(int mX, int mY, float f) {
@@ -73,14 +74,14 @@ public class GuiNovamenuControlsSlot extends GuiNovamenuSlot {
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
 		ScaledResolution res = new ScaledResolution(settings, parent.getMinecraft().displayWidth, parent.getMinecraft().displayHeight);
 		int f = res.getScaleFactor();
-		GL11.glScissor(0, 49*f, parent.width*f, (parent.height-90)*f);
+		GL11.glScissor(0, 49 * f, parent.width * f, (parent.height - 90) * f);
 		int width = 70;
 		int height = 20;
 		xPosition -= 20;
 		boolean flag = mx >= xPosition && my >= yPosition && mx < xPosition + width && my < yPosition + height;
 		int k = (flag ? 2 : 1);
 		ResourceLocation rsrcLoc = new ResourceLocation("textures/gui/widgets.png");
-		Minecraft.getMinecraft().func_110434_K().func_110577_a(rsrcLoc);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(rsrcLoc);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		parent.drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);
 		parent.drawTexturedModalRect(xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height);

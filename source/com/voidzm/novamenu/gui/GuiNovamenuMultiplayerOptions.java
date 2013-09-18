@@ -28,8 +28,8 @@ public class GuiNovamenuMultiplayerOptions extends GuiNovamenuScreen {
 	@Override
 	public void initGui() {
 		int i = 0;
-		this.chatOptionsTitle = I18n.func_135053_a("options.chat.title");
-		this.multiplayerOptionsTitle = I18n.func_135053_a("options.multiplayer.title");
+		this.chatOptionsTitle = I18n.getString("options.chat.title");
+		this.multiplayerOptionsTitle = I18n.getString("options.multiplayer.title");
 		this.buttons.clear();
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height / 6, 150, 16, 0, this.settings.getKeyBinding(EnumOptions.CHAT_VISIBILITY)));
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 + 5, this.height / 6, 150, 16, 1, this.settings.getKeyBinding(EnumOptions.CHAT_COLOR)));
@@ -42,7 +42,7 @@ public class GuiNovamenuMultiplayerOptions extends GuiNovamenuScreen {
 		this.buttons.add(new GuiSliderTransparent(this, 8, this.width / 2 - 155, this.height / 6 + 96, EnumOptions.CHAT_WIDTH, this.settings.getKeyBinding(EnumOptions.CHAT_WIDTH), this.settings.getOptionFloatValue(EnumOptions.CHAT_WIDTH)));
 		this.someInt = this.height / 6 + 120;
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height / 6 + 144, 150, 16, 9, this.settings.getKeyBinding(EnumOptions.SHOW_CAPE)));
-		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 10, I18n.func_135053_a("gui.done")));
+		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 100, this.height / 6 + 168, 200, 16, 10, I18n.getString("gui.done")));
 	}
 
 	@Override

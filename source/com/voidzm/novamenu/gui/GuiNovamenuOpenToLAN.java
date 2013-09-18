@@ -4,23 +4,23 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
 import net.minecraft.world.EnumGameType;
 
 public class GuiNovamenuOpenToLAN extends GuiNovamenuScreen {
-	
+
 	private GuiNovamenuScreen parent;
 	private GuiButtonTransparent buttonAllowCommands;
 	private GuiButtonTransparent buttonGamemode;
-	
+
 	private String gamemode = "survival";
-	
+
 	private boolean allowCommands = false;
-	
+
 	public GuiNovamenuOpenToLAN(GuiNovamenuScreen screen) {
 		this.parent = screen;
 	}
 
+	@Override
 	public void initGui() {
 		this.buttons.clear();
 		this.buttons.add(new GuiButtonTransparent(this, this.width / 2 - 155, this.height - 28, 150, 16, 0, StatCollector.translateToLocal("lanServer.start")));
@@ -31,13 +31,13 @@ public class GuiNovamenuOpenToLAN extends GuiNovamenuScreen {
 	}
 
 	private void setupButtons() {
-		this.buttonGamemode.text = I18n.func_135053_a("selectWorld.gameMode") + " " + I18n.func_135053_a("selectWorld.gameMode." + this.gamemode);
-		this.buttonAllowCommands.text = I18n.func_135053_a("selectWorld.allowCommands") + " ";
+		this.buttonGamemode.text = I18n.getString("selectWorld.gameMode") + " " + I18n.getString("selectWorld.gameMode." + this.gamemode);
+		this.buttonAllowCommands.text = I18n.getString("selectWorld.allowCommands") + " ";
 		if(this.allowCommands) {
-			this.buttonAllowCommands.text = this.buttonAllowCommands.text + I18n.func_135053_a("options.on");
+			this.buttonAllowCommands.text = this.buttonAllowCommands.text + I18n.getString("options.on");
 		}
 		else {
-			this.buttonAllowCommands.text = this.buttonAllowCommands.text + I18n.func_135053_a("options.off");
+			this.buttonAllowCommands.text = this.buttonAllowCommands.text + I18n.getString("options.off");
 		}
 	}
 
@@ -49,12 +49,12 @@ public class GuiNovamenuOpenToLAN extends GuiNovamenuScreen {
 				String s = this.mc.getIntegratedServer().shareToLAN(EnumGameType.getByName(this.gamemode), this.allowCommands);
 				ChatMessageComponent cmc;
 				if(s != null) {
-					cmc = ChatMessageComponent.func_111082_b("commands.publish.started", new Object[] {s});
+					cmc = ChatMessageComponent.createFromTranslationWithSubstitutions("commands.publish.started", new Object[] {s});
 				}
 				else {
-					cmc = ChatMessageComponent.func_111066_d("commands.publish.failed");
+					cmc = ChatMessageComponent.createFromText("commands.publish.failed");
 				}
-				this.mc.ingameGUI.getChatGUI().printChatMessage(cmc.func_111068_a(true));
+				this.mc.ingameGUI.getChatGUI().printChatMessage(cmc.toStringWithFormatting(true));
 				break;
 			case 1:
 				this.mc.displayGuiScreen(this.parent);
@@ -77,7 +77,7 @@ public class GuiNovamenuOpenToLAN extends GuiNovamenuScreen {
 				break;
 		}
 	}
-	
+
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, height, 0xBB000000);

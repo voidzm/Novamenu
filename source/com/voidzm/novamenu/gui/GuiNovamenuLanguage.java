@@ -27,7 +27,7 @@ public class GuiNovamenuLanguage extends GuiNovamenuScreen {
 
 	@Override
 	public void initGui() {
-		this.buttons.add(this.doneButton = new GuiButtonTransparent(this, this.width / 2 - 75, this.height - 26, 150, 16, 6, I18n.func_135053_a("gui.done")));
+		this.buttons.add(this.doneButton = new GuiButtonTransparent(this, this.width / 2 - 75, this.height - 26, 150, 16, 6, I18n.getString("gui.done")));
 		this.languageSlot = new GuiNovamenuLanguageSlot(this);
 		this.languageSlot.boxshift = 0;
 		this.languageSlot.registerScrollButtons(this.buttons, 7, 8);
@@ -55,8 +55,8 @@ public class GuiNovamenuLanguage extends GuiNovamenuScreen {
 		this.drawRect(0, height-60, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
 		this.languageSlot.drawScreen(par1, par2, par3);
-		this.drawCenteredString(this.fontRenderer, I18n.func_135053_a("options.language"), this.width / 2, 18, 16777215);
-		this.drawCenteredString(this.fontRenderer, "(" + I18n.func_135053_a("options.languageWarning") + ")", this.width / 2, this.height - 46, 8421504);
+		this.drawCenteredString(this.fontRenderer, I18n.getString("options.language"), this.width / 2, 18, 16777215);
+		this.drawCenteredString(this.fontRenderer, "(" + I18n.getString("options.languageWarning") + ")", this.width / 2, this.height - 46, 8421504);
 	}
 
 	public static GameSettings getGameSettings(GuiNovamenuLanguage par0GuiLanguage) {

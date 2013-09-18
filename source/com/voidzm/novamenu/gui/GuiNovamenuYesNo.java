@@ -24,8 +24,8 @@ public class GuiNovamenuYesNo extends GuiNovamenuScreen {
 		this.message1 = par2Str;
 		this.message2 = par3Str;
 		this.worldNumber = par4;
-		this.buttonText1 = I18n.func_135053_a("gui.yes");
-		this.buttonText2 = I18n.func_135053_a("gui.no");
+		this.buttonText1 = I18n.getString("gui.yes");
+		this.buttonText2 = I18n.getString("gui.no");
 		this.imageTick = par1GuiScreen.imageTick;
 	}
 
