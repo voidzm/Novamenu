@@ -12,7 +12,6 @@ import com.google.common.eventbus.EventBus;
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.MetadataCollection;
-import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
@@ -20,9 +19,9 @@ import cpw.mods.fml.common.versioning.InvalidVersionSpecificationException;
 import cpw.mods.fml.common.versioning.VersionRange;
 
 public class NovamenuModContainer extends DummyModContainer {
-	
+
 	private ArtifactVersion processedVersion;
-	
+
 	@Override
 	public String getModId() {
 		return "Novamenu";
@@ -53,15 +52,17 @@ public class NovamenuModContainer extends DummyModContainer {
 		meta.description = "A GUI mod that overhauls the Minecraft default GUI for a cleaner, more transparent look.";
 		meta.credits = "Designed and coded by voidzm.";
 		meta.url = "https://github.com/voidzm/Novamenu/";
-		meta.logoFile = "/mods/novamenu/textures/gui/logo.png";
+		meta.logoFile = "/assets/minecraft/textures/gui/logo.png";
 		return meta;
 	}
 
 	@Override
-	public void bindMetadata(MetadataCollection mc) {}
+	public void bindMetadata(MetadataCollection mc) {
+	}
 
 	@Override
-	public void setEnabledState(boolean enabled) {}
+	public void setEnabledState(boolean enabled) {
+	}
 
 	@Override
 	public Set<ArtifactVersion> getRequirements() {
@@ -126,7 +127,8 @@ public class NovamenuModContainer extends DummyModContainer {
 	public VersionRange acceptableMinecraftVersionRange() {
 		try {
 			return VersionRange.createFromVersionSpec(NovamenuPlugin.minecraftVersion);
-		} catch (InvalidVersionSpecificationException e) {
+		}
+		catch(InvalidVersionSpecificationException e) {
 			e.printStackTrace();
 			return null;
 		}

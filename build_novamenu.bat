@@ -1,22 +1,22 @@
 @echo off
-echo ---------------- Building ----------------
-echo ------------ Novamenu 1.1.2 --------------
+echo ----- Novamenu 1.1.3 -----
+echo ----- Build started  -----
 xcopy ..\..\forge\mcp\src ..\..\forge\mcp\src-backup /E /I /Q
-echo Finished backing up forge sources.
+echo Minecraft source backed up.
 xcopy source ..\..\forge\mcp\src\minecraft /E /Q
-echo Finished copying Novamenu sources to build path.
+echo Copied Novamenu source.
 cd ..\..\forge\mcp
-call recompile.bat
-call reobfuscate_srg.bat
-echo Source compiled and obfuscated.
+call recompile.bat < nul
+call reobfuscate_srg.bat < nul
+echo Compile complete.
 cd ..\..\projects\novamenu
 xcopy resources ..\..\forge\mcp\reobf\minecraft /E /Q
-echo Added resources and assets to artifact.
+echo Copied Novamenu resources.
 cd ..\..\forge\mcp
 rmdir /S /Q src
 xcopy src-backup src /E /I /Q
 rmdir /S /Q src-backup
 cd reobf\minecraft
-jar cmf META-INF\MANIFEST.MF Novamenu1.1.2.jar com assets mcmod.info remap.csv
-echo ----- Build complete! Artifact is located at forge\mcp\reobf\minecraft\Novamenu1.1.2.jar -----
+jar cmf META-INF\MANIFEST.MF Novamenu1.1.3.jar com assets mcmod.info remap.csv
+echo -------- Build complete. Outputted to mcp\reobf\minecraft\Novamenu1.1.3.jar --------
 pause

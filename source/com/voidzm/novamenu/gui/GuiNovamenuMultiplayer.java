@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +20,6 @@ import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringTranslate;
 
 import org.lwjgl.input.Keyboard;
 
@@ -29,32 +27,32 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 
 	private static int threadsPending = 0;
 	private static Object lock = new Object();
-	
+
 	private GuiNovamenuScreen parent;
-	
+
 	private GuiNovamenuServerSlot slotServer;
 	private ServerList internetServerList;
-	
+
 	private int selectedServer = -1;
 	private GuiButtonTransparent buttonEdit;
 	private GuiButtonTransparent buttonSelect;
 	private GuiButtonTransparent buttonDelete;
-	
+
 	private boolean deleteClicked = false;
 	private boolean addClicked = false;
 	private boolean editClicked = false;
 	private boolean directClicked = false;
-	
+
 	private String lagTooltip = null;
-	
+
 	private ServerData serverData = null;
 	private LanServerList localServerList;
 	private ThreadLanServerFind serverFindThread;
-	
+
 	private int ticksOpen;
 	private boolean initialized;
 	private List localServers = Collections.emptyList();
-	
+
 	public GuiNovamenuMultiplayer(GuiNovamenuScreen screen) {
 		this.parent = screen;
 		this.imageTick = screen.imageTick;
@@ -120,44 +118,44 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 	@Override
 	public void buttonEvent(int id) {
 		switch(id) {
-		case 0:
-			this.parent.imageTick = this.imageTick;
-			this.mc.displayGuiScreen(this.parent);
-			break;
-		case 1:
-			this.joinServer(this.selectedServer);
-			break;
-		case 2:
-			String s = this.internetServerList.getServerData(this.selectedServer).serverName;
-			if(s != null) {
-				this.deleteClicked = true;
-				String s1 = I18n.getString("selectServer.deleteQuestion");
-				String s2 = "\'" + s + "\' " + I18n.getString("selectServer.deleteWarning");
-				String s3 = I18n.getString("selectServer.deleteButton");
-				String s4 = I18n.getString("gui.cancel");
-				GuiNovamenuYesNo guiyesno = new GuiNovamenuYesNo(this, s1, s2, s3, s4, this.selectedServer);
-				this.mc.displayGuiScreen(guiyesno);
-			}
-			break;
-		case 3:
-			this.addClicked = true;
-			this.mc.displayGuiScreen(new GuiNovamenuAddServer(this, this.serverData = new ServerData(StatCollector.translateToLocal("selectServer.defaultName"), "")));
-			break;
-		case 4:
-			this.directClicked = true;
-			this.mc.displayGuiScreen(new GuiNovamenuDirectConnect(this, this.serverData = new ServerData(StatCollector.translateToLocal("selectServer.defaultName"), "")));
-			break;
-		case 7:
-			this.editClicked = true;
-			ServerData sdata = this.internetServerList.getServerData(this.selectedServer);
-			this.serverData = new ServerData(sdata.serverName, sdata.serverIP);
-			this.serverData.setHideAddress(sdata.isHidingAddress());
-			this.mc.displayGuiScreen(new GuiNovamenuAddServer(this, this.serverData));
-			break;
-		case 8:
-			this.parent.imageTick = this.imageTick;
-			this.mc.displayGuiScreen(new GuiNovamenuMultiplayer(this.parent));
-			break;
+			case 0:
+				this.parent.imageTick = this.imageTick;
+				this.mc.displayGuiScreen(this.parent);
+				break;
+			case 1:
+				this.joinServer(this.selectedServer);
+				break;
+			case 2:
+				String s = this.internetServerList.getServerData(this.selectedServer).serverName;
+				if(s != null) {
+					this.deleteClicked = true;
+					String s1 = I18n.getString("selectServer.deleteQuestion");
+					String s2 = "\'" + s + "\' " + I18n.getString("selectServer.deleteWarning");
+					String s3 = I18n.getString("selectServer.deleteButton");
+					String s4 = I18n.getString("gui.cancel");
+					GuiNovamenuYesNo guiyesno = new GuiNovamenuYesNo(this, s1, s2, s3, s4, this.selectedServer);
+					this.mc.displayGuiScreen(guiyesno);
+				}
+				break;
+			case 3:
+				this.addClicked = true;
+				this.mc.displayGuiScreen(new GuiNovamenuAddServer(this, this.serverData = new ServerData(StatCollector.translateToLocal("selectServer.defaultName"), "")));
+				break;
+			case 4:
+				this.directClicked = true;
+				this.mc.displayGuiScreen(new GuiNovamenuDirectConnect(this, this.serverData = new ServerData(StatCollector.translateToLocal("selectServer.defaultName"), "")));
+				break;
+			case 7:
+				this.editClicked = true;
+				ServerData sdata = this.internetServerList.getServerData(this.selectedServer);
+				this.serverData = new ServerData(sdata.serverName, sdata.serverIP);
+				this.serverData.setHideAddress(sdata.isHidingAddress());
+				this.mc.displayGuiScreen(new GuiNovamenuAddServer(this, this.serverData));
+				break;
+			case 8:
+				this.parent.imageTick = this.imageTick;
+				this.mc.displayGuiScreen(new GuiNovamenuMultiplayer(this.parent));
+				break;
 		}
 	}
 
@@ -242,9 +240,9 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 	public void drawScreenForeground(int par1, int par2, float par3) {
 		this.drawRect(0, 0, width, 32, 0xBB000000);
 		this.drawRect(0, 32, width, 33, 0xDD000000);
-		this.drawRect(0, 33, width, height-65, 0x88000000);
-		this.drawRect(0, height-65, width, height-64, 0xDD000000);
-		this.drawRect(0, height-64, width, height, 0xBB000000);
+		this.drawRect(0, 33, width, height - 65, 0x88000000);
+		this.drawRect(0, height - 65, width, height - 64, 0xDD000000);
+		this.drawRect(0, height - 64, width, height, 0xBB000000);
 		super.drawScreenForeground(par1, par2, par3);
 		this.lagTooltip = null;
 		this.slotServer.drawScreen(par1, par2, par3);
@@ -302,9 +300,6 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 			String[] astring;
 			if(s.startsWith("\u00a7") && s.length() > 1) {
 				astring = s.substring(1).split("\u0000");
-				
-				System.out.println("Server: " + par1ServerData.serverIP + ", " + Arrays.toString(astring));
-				
 				if(MathHelper.parseIntWithDefault(astring[0], 0) == 1) {
 					par1ServerData.serverMOTD = astring[3];
 					par1ServerData.field_82821_f = MathHelper.parseIntWithDefault(astring[1], par1ServerData.field_82821_f);
@@ -334,7 +329,8 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 					j = Integer.parseInt(astring[1]);
 					k = Integer.parseInt(astring[2]);
 				}
-				catch (Exception exception) {}
+				catch(Exception exception) {
+				}
 				par1ServerData.serverMOTD = EnumChatFormatting.GRAY + s;
 				if(j >= 0 && k > 0) {
 					par1ServerData.populationInfo = EnumChatFormatting.GRAY + "" + j + "" + EnumChatFormatting.DARK_GRAY + "/" + EnumChatFormatting.GRAY + k;
@@ -352,19 +348,22 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 					datainputstream.close();
 				}
 			}
-			catch(Throwable throwable) {}
+			catch(Throwable throwable) {
+			}
 			try {
 				if(dataoutputstream != null) {
 					dataoutputstream.close();
 				}
 			}
-			catch (Throwable throwable1) {}
+			catch(Throwable throwable1) {
+			}
 			try {
 				if(socket != null) {
 					socket.close();
 				}
 			}
-			catch (Throwable throwable2) {}
+			catch(Throwable throwable2) {
+			}
 		}
 	}
 
@@ -437,5 +436,5 @@ public class GuiNovamenuMultiplayer extends GuiNovamenuScreen {
 	public static String getAndSetLagTooltip(GuiNovamenuMultiplayer par0GuiMultiplayer, String par1Str) {
 		return par0GuiMultiplayer.lagTooltip = par1Str;
 	}
-	
+
 }

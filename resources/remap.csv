@@ -1,8 +1,8 @@
-1.6.2
-class,net.minecraft.client.Minecraft,ats
-class,net.minecraft.client.gui.GuiScreen,awb
+1.6.4
+class,net.minecraft.client.Minecraft,atv
+class,net.minecraft.client.gui.GuiScreen,awe
 method,net.minecraft.client.Minecraft/displayGuiScreen,a
 field,net.minecraft.client.settings.GameSettings/showDebugInfo,ab
-field,net.minecraft.client.gui.GuiDisconnected/errorMessage,a
-field,net.minecraft.client.gui.GuiDisconnected/errorDetail,b
-field,net.minecraft.client.gui.GuiDisconnected/field_74247_c,c
+field,net.minecraft.client.gui.GuiDisconnected/errorMessage,field_74248_a
+field,net.minecraft.client.gui.GuiDisconnected/errorDetail,field_74246_b
+field,net.minecraft.client.gui.GuiDisconnected/field_74247_c,field_74247_c

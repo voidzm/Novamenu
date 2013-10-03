@@ -11,7 +11,6 @@ public class GuiNovamenuGameOver extends GuiNovamenuScreen {
 
 	public GuiNovamenuGameOver() {
 		super();
-		System.out.println("Created.");
 	}
 
 	@Override
