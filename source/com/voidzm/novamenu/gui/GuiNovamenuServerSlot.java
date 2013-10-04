@@ -33,7 +33,7 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 			int j = GuiNovamenuMultiplayer.getSelectedServer(this.parent);
 			GuiNovamenuMultiplayer.getAndSetSelectedServer(this.parent, par1);
 			ServerData serverdata = GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers() > par1 ? GuiNovamenuMultiplayer.getInternetServerList(this.parent).getServerData(par1) : null;
-			boolean flag1 = GuiNovamenuMultiplayer.getSelectedServer(this.parent) >= 0 && GuiNovamenuMultiplayer.getSelectedServer(this.parent) < this.getSize() && (serverdata == null || serverdata.field_82821_f == 74);
+			boolean flag1 = GuiNovamenuMultiplayer.getSelectedServer(this.parent) >= 0 && GuiNovamenuMultiplayer.getSelectedServer(this.parent) < this.getSize() && (serverdata == null || serverdata.field_82821_f == 78);
 			boolean flag2 = GuiNovamenuMultiplayer.getSelectedServer(this.parent) < GuiNovamenuMultiplayer.getInternetServerList(this.parent).countServers();
 			GuiNovamenuMultiplayer.getButtonSelect(this.parent).enabled = flag1;
 			GuiNovamenuMultiplayer.getButtonEdit(this.parent).enabled = flag2;
@@ -112,8 +112,8 @@ public class GuiNovamenuServerSlot extends GuiNovamenuSlot {
 				(new ThreadNovamenuPollServers(this, serverdata)).start();
 			}
 		}
-		boolean flag = serverdata.field_82821_f > 74;
-		boolean flag1 = serverdata.field_82821_f < 74;
+		boolean flag = serverdata.field_82821_f > 78;
+		boolean flag1 = serverdata.field_82821_f < 78;
 		boolean flag2 = flag || flag1;
 		this.parent.drawString(this.parent.getFontRenderer(), serverdata.serverName, par2 + 2, par3 + 1, 16777215);
 		this.parent.drawString(this.parent.getFontRenderer(), serverdata.serverMOTD, par2 + 2, par3 + 12, 8421504);

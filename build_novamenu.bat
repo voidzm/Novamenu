@@ -1,5 +1,5 @@
 @echo off
-echo ----- Novamenu 1.1.3 -----
+echo ----- Novamenu 1.1.4 -----
 echo ----- Build started  -----
 xcopy ..\..\forge\mcp\src ..\..\forge\mcp\src-backup /E /I /Q
 echo Minecraft source backed up.
@@ -17,6 +17,6 @@ rmdir /S /Q src
 xcopy src-backup src /E /I /Q
 rmdir /S /Q src-backup
 cd reobf\minecraft
-jar cmf META-INF\MANIFEST.MF Novamenu1.1.3.jar com assets mcmod.info remap.csv
-echo -------- Build complete. Outputted to mcp\reobf\minecraft\Novamenu1.1.3.jar --------
+jar cmf META-INF\MANIFEST.MF Novamenu1.1.4.jar com assets mcmod.info remap.csv
+echo -------- Build complete. Outputted to mcp\reobf\minecraft\Novamenu1.1.4.jar --------
 pause
