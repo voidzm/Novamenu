@@ -1,6 +1,5 @@
 package com.voidzm.novamenu.gui;
 
-import java.io.IOException;
 import java.util.List;
 
 import net.minecraft.client.renderer.Tessellator;
@@ -105,8 +104,8 @@ public class GuiNovamenuResourcePackSlot extends GuiNovamenuSlot {
 				this.parent.drawString(GuiNovamenuResourcePacks.fetchFontRenderer(this.parent), "Default", par2 + 32 + 2, par3 + 1, 16777215);
 				this.parent.drawString(GuiNovamenuResourcePacks.fetchFontRenderer(this.parent), pmds.getPackDescription(), par2 + 32 + 2, par3 + 12 + 10, 8421504);
 			}
-			catch(IOException ioexception) {
-				ioexception.printStackTrace();
+			catch(Exception ex) {
+				ex.printStackTrace();
 			}
 		}
 		else {

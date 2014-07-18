@@ -1,29 +1,13 @@
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
+# Ignore Gradle cache files & directories
+bin/
+build/
+eclipse/
+.classpath
+.gradle/
+.project
+.settings/
 
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-*.log
-*.sql
-*.sqlite
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-Icon?
-ehthumbs.db
+# Ignore OS cache files & directories
+*.DS_Store
+_MACOSX
 Thumbs.db
-
-*.psd
