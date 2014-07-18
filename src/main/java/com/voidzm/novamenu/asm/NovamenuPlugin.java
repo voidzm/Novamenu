@@ -46,11 +46,6 @@ public class NovamenuPlugin implements IFMLLoadingPlugin, IFMLCallHook {
 	}
 
 	@Override
-	public String[] getLibraryRequestClass() {
-		return null;
-	}
-
-	@Override
 	public String[] getASMTransformerClass() {
 		return new String[] {NovamenuTransformer.class.getName()};
 	}
